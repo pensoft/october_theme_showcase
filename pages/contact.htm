@@ -1,0 +1,50 @@
+title = "Get in touch"
+url = "/contact"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[siteSearchInclude]
+==
+{% component 'siteSearchInclude' %}
+
+<div class="container">
+    <div class="row">
+		<div class="col-xs-12 col-md-6">
+			<h1>Contact</h1>
+			<div class="contact_info row">
+				<div class="col-md-5 col-xs-12 coordinator_image"><img src="{{'IMG_6693_crop.jpg' | media | resize(202, 202, {'mode': 'crop'}) }}"> </div>
+				<div class="col-md-7 col-xs-12 coordinator_info">
+					<h3>PROJECT COORDINATOR</h3>
+					<p>Prof. David Kleijn <br>
+					Wageningen university (WU), the Netherlands</p>
+					<p><a href="mailto:david.kleijn@wur.nl"><i class="pr normal p-mail"></i> david.kleijn[at]wur.nl</a> </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs">Prof. David Kleijn is an ecologist interested in biodiversity conservation on farmland and optimization of ecosystem services in agriculture. Together with his group he studies the impacts of land-use change on biodiversity and effects of biodiversity on agricultural production with the aim to identify win-win situations. This is increasingly done in collaboration with local stakeholders such as farmer organizations, municipalities, conservation organizations, water boards and provincial governments. Kleijn previously coordinated the successful EU FP5 EASY and FP7 LIBERATION projects.<p>&nbsp;</p></div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<h1>Follow SHOWCASE on</h1>
+			<div class="subscribe-items text-center d-flex justify-content-between" style="max-width: 400px;">
+				{% if this.theme.twitter %}
+				<a href="{{this.theme.twitter_url}}" target="_blank" class="btn p-primary pr p-twitter big"></a>
+				{% endif %}
+				{% if this.theme.facebook %}
+				<a href="{{this.theme.facebook_url}}" target="_blank" class="btn pr p-primary p-facebook big"></a>
+				{% endif %}
+				{% if this.theme.linkedin %}
+				<a href="{{this.theme.linkedin_url}}" target="_blank" class="btn pr p-primary p-linkedin big"></a>
+				{% endif %}
+				{% if this.theme.youtube %}
+				<a href="{{this.theme.youtube_url}}" target="_blank" class="btn pr p-primary p-youtube big"></a>
+				{% endif %}
+				{% if this.theme.instagram %}
+				<a href="{{this.theme.instagram_url}}" target="_blank" class="btn pr p-primary p-instagram big"></a>
+				{% endif %}
+			</div>
+		</div>
+    </div>
+</div>

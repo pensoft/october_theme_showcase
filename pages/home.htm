@@ -1,0 +1,88 @@
+title = "SHOWCASing synergies between agriculture, biodiversity and Ecosystem services to help farmers capitalising on native biodiversity"
+url = "/"
+layout = "default"
+meta_description = "homepage desc"
+is_hidden = 0
+seo_keywords = "keywords"
+robot_index = "index"
+robot_follow = "follow"
+
+[article_highlights]
+maxItems = 10
+title = "News and Events"
+baseUrl = "/news"
+templates = "template2"
+
+[publications_list]
+baseUrl = "/news"
+templates = "template2"
+
+[jumbotron]
+jumbotron = "homepage"
+title = 0
+background = "#ffffff"
+
+[Timeline]
+limit = 3
+==
+<!-- latest from news -->
+{% component 'jumbotron' %}
+<div class="container-fluid banner bg-secondary">
+	{% component 'article_highlights' %}
+	<div class="container">
+		{% component 'Timeline' %}
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs">
+			{% component 'publications_list' %}
+		</div>
+	</div>
+	<!-- subscribes -->
+	<div class="row">
+		<div class="col-sm-8 col-xs-12">
+			<div class="twitter-widget">
+			    <a class="twitter-timeline" href="https://twitter.com/SHOWCASE_H2020?ref_src=twsrc%5Etfw">Tweets by SHOWCASE_H2020</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			</div>
+		</div>
+		<div class="col-sm-4 col-xs-12">
+
+			<div class="subscribe-container">
+				<div class="subscribe-items d-flex justify-content-evenly flex-column">
+					<a href="/calendar" class="btn btn-primary fluid">Calendar</a>
+
+					{%if this.theme.subscribe%}
+					<a href="{{this.theme.subscribe}}" target="_blank" class="btn btn-primary fluid">Subscribe</a>
+					{%endif%}
+
+					{%if this.theme.feedback%}
+					<a href="mailto:{{this.theme.feedback}}" class="btn btn-primary fluid">Feedback</a>
+					{%endif%}
+				</div>
+				<div class="subscribe-items text-center d-flex justify-content-evenly">
+					{% if this.theme.twitter %}
+					<a href="{{this.theme.twitter_url}}" target="_blank" class="btn p-primary pr p-twitter big"></a>
+					{% endif %}
+					{% if this.theme.facebook %}
+					<a href="{{this.theme.facebook_url}}" target="_blank" class="btn pr p-primary p-facebook big"></a>
+					{% endif %}
+					{% if this.theme.linkedin %}
+					<a href="{{this.theme.linkedin_url}}" target="_blank" class="btn pr p-primary p-linkedin big"></a>
+					{% endif %}
+					{% if this.theme.youtube %}
+					<a href="{{this.theme.youtube_url}}" target="_blank" class="btn pr p-primary p-youtube big"></a>
+					{% endif %}
+					{% if this.theme.instagram %}
+					<a href="{{this.theme.instagram_url}}" target="_blank" class="btn pr p-primary p-instagram big"></a>
+					{% endif %}
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+</div>

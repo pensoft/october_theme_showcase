@@ -1,0 +1,20 @@
+title = "Internal repository"
+url = "/internal-repository/:slug?|[a-zA-Z\-0-9]/:parent_id?|[0-9]"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[session]
+security = "user"
+allowedUserGroups[] = "internal-users"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+redirect = "home"
+
+[internalrepository]
+==
+{% component 'session' %}
+<div class="container">
+    {% component 'internalrepository' %}
+</div>

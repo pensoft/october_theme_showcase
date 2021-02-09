@@ -1,0 +1,72 @@
+.fc-toolbar {
+    flex-direction: column;
+}
+.breakpoint-large({
+    .fc-toolbar {
+        flex-direction: row;
+    }
+});
+
+.fc-button-primary:disabled{
+  display: none;
+}
+
+.fc-button-group > .fc-button, .fc-button-group > .fc-button:not(:first-child){
+  background: @green-color!important;
+  color: @white-color!important;
+  border-radius: 30px!important;
+  border: none;
+}
+
+.fc-button-group > .fc-today-button, .fc-button-group > fc-prev-button{
+  border-radius: 50%;
+}
+
+.fc-button-group > .fc-button:hover, .fc-button-group > .fc-button:not(:first-child):hover, .fc-button-primary:not(:disabled).fc-button-active{
+  background: @white-color!important;
+  color: @green-color!important;
+  border: 1px solid @green-color!important;
+}
+
+.fc-toolbar.fc-header-toolbar{
+  display: flex;
+}
+
+.fc-left{
+  order: 2;
+  position: absolute;
+  margin-left: 220px;
+  .breakpoint-small-down({
+    order: 1;
+    position: unset;
+    margin-left: 0px;
+  });
+}
+
+.fc-center{
+  order: 1;
+}
+
+.fc-right{
+  order: 3;
+}
+
+.fc-left .fc-button{
+  padding: 6px;
+  margin: 0 10px;
+}
+
+.fc-right .fc-button{
+  padding: 5px 6px;
+  margin: 0 10px;
+  width: 80px;
+}
+
+.fc-right .fc-button:last-of-type{
+  margin: 0 0 0 10px;
+}
+
+.fc-event{
+  background: #147064!important;
+  border-color: #147064!important;
+}
