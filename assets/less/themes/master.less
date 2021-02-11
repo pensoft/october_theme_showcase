@@ -146,6 +146,11 @@ ol.q {list-style-type: upper-roman; padding-left: 20px;}
         justify-content: center;
         color: @footer-text-color;
         font-size: 14px!important;
+        white-space: nowrap;
+        .breakpoint-small-down ({
+          font-size: 12px!important;
+
+        })
     }
     .social-networks {
         flex: 1 0 auto;
@@ -308,5 +313,11 @@ ol.q {list-style-type: upper-roman; padding-left: 20px;}
 }
 .project_background .card-img{
     width: 45%;
+}
+
+footer .align-items-center{
+  .breakpoint-small-down({
+    text-align: center!important;
+  });
 }
 
