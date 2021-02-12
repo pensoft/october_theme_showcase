@@ -4,6 +4,13 @@ layout = "default"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
+
+[session]
+security = "user"
+allowedUserGroups[] = "internal-users"
+allowedUserGroups[] = "registered"
+allowedUserGroups[] = "guest"
+redirect = "home"
 ==
 <?php
 use Rainlab\User\Models\User;
@@ -11,10 +18,11 @@ use RainLab\User\Models\UserGroup;
 
 function onStart(){
 	$users = User::where('is_activated', true)->get();
+	$this['users'] = $users;
 }
 ?>
 ==
-<div class="container">
+<{% component 'session' %}div class="container">
 	{% for user in users %}
 	<div class="row middle-xs userBox">
 		<div class="col-xs-3 col-md-1 userPic">

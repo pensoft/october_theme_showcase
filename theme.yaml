@@ -61,6 +61,10 @@ form:
                 label: Site name
                 comment: The website name as it should appear on the front-end
                 default: Pensoft projects
+            site_domain:
+                label: Site domain
+                comment: Used in Mailing plugin, mailing group domain
+                default: 'pensoft-test.test'
             tag_line:
                 label: Tagline
                 default: My first project website
