@@ -24,6 +24,7 @@ background = "#ffffff"
 
 [Timeline]
 limit = 3
+upcoming = 1
 ==
 <!-- latest from news -->
 {% component 'jumbotron' %}
@@ -76,6 +77,9 @@ limit = 3
 					{% endif %}
 					{% if this.theme.instagram %}
 					<a href="{{this.theme.instagram_url}}" target="_blank" class="btn pr p-primary p-instagram big"></a>
+					{% endif %}
+					{% if this.theme.researchgate %}
+					<a href="{{this.theme.researchgate_url}}" target="_blank" class="btn pr p-primary p-researchgate big" style="width: 64px;"></a>
 					{% endif %}
 				</div>
 			</div>
