@@ -31,6 +31,8 @@ $(document).ready(function() {
 			$(this).children(".plusminus").html('<span class="minus"></span>');
 		}
 	});
+
+	$('.dropdown-menu').removeAttr('id');
 });
 
 

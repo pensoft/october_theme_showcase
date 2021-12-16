@@ -54,7 +54,7 @@
         flex-direction: column-reverse;
         align-items: center;
         background-color: inherit;
-        
+
         .navbar-nav {
             display: flex;
             flex-basis: 100%;
@@ -72,10 +72,10 @@
             align-items: center;
             z-index: @zindex-dropdown;
             .font-size(1.6);
-    
+
             .nav-item {
                 display: block;
-                
+
                 padding-top: 0;
                 padding-bottom: 0;
                 padding-left: 0;
@@ -106,10 +106,10 @@
                 &.active a{
                   opacity: 0.6;
                 }
-                
+
                 background-color: inherit;
                 &.dropdown {
-                    
+
                     .dropdown-menu {
                         position: relative;
                         z-index: @zindex-dropdown;
@@ -307,6 +307,21 @@ div.search{
   }
 
   .hidden-xs{
+    display: none;
+  }
+
+  #menuToggle .dropdown-menu{
+    list-style-type: none!important;
+    font-size: 0.8em;
+    margin-top: 10px;
+
+    li{
+      padding-right: 0!important;
+      padding-top: 0!important;
+    }
+  }
+
+  #menuToggle .dropdown  span{
     display: none;
   }
 
