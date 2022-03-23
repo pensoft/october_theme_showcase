@@ -41,14 +41,43 @@ function onStart(){
     //$slug = (int)$this->param('slug') ? (int)$this->param('slug') : 1;
 	//$this['SelectedLanguage'] = App::getLocale();
     //$this['slug'] = !(is_numeric($this->param('slug')) || $this->param('slug') == null);
-    
+	$this['entries'] = Entry::orderBy('start', 'desc')->paginate(20);
     $this['slug'] = $this->param('slug');
 }
 ?>
 ==
 <div class="container">
 {% if not slug %}
-    {% component 'calendar' %}    
+	<div class="tabs">
+		<a class="" href="#calendarView">Calendar view</a>
+		<a class="" href="#listView">List view</a>
+	</div>
+	<div class="row" id="calendarView">
+		{% component 'calendar' %}
+	</div>
+	<div class="row" id="listView">
+		<div class="events_list_container">
+			{% for entry in entries %}
+			{% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+
+			<div class="event_list_item">
+				<div class="row between-xs time_and_date">
+					<div class="col-md start-md col-xs-12 center-xs">{{entry.event_date}}</div>
+					<div class="col-md end-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
+				</div>
+				<div class="row">
+					<!--<div class="col-xs-1">{{entry.start|date('g:i')}}</div> <div class="col-xs-11">{{entry.title}}</div>-->
+					<div class="col-md-2 start-md col-xs-12 center-xs">{{entry.event_time}}</div> <div class="col-md-10 start-md col-xs-12 center-xs"><a class="button" href="{{ url }}" target="_blank">{{entry.title}}</a></div>
+				</div>
+			</div>
+
+			{% endfor %}
+		</div>
+		<div class="row container">
+			{{ entries.fragment('listView').render|raw }}
+		</div>
+
+	</div>
 {% else %}
 
     {% if entry %}

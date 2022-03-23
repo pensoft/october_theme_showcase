@@ -74,3 +74,63 @@
 .fc-day-grid-event .fc-time{
   display: none;
 }
+
+.fc-listYear-button.fc-button.fc-button-primary,
+.fc-dayGridDay-button.fc-button.fc-button-primary{
+  display: none;
+}
+
+.tabs{
+  margin-bottom: 40px;
+  width: 100%;
+  display: block;
+  //float: right;
+  text-align: right;
+  .btn-primary{
+    .breakpoint-small-down({
+      margin-bottom: 20px;
+    });
+  }
+  .breakpoint-small-down({
+    margin-bottom: 20px;
+    text-align: center;
+  });
+  a{
+    margin-left: 20px;
+    width: fit-content;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: Oswald;
+    color: @green-color!important;
+    .breakpoint-small-down({
+      margin-left: 0px;
+      width: 100%;
+      text-align: center;
+    });
+
+    &.active{
+      opacity: 0.6;
+      display: none!important;
+    }
+  }
+
+}
+
+.events_list_container{
+  .rounded(4px);
+  //box-shadow: 0 6px 27px rgba(0, 0, 0, 0.3);
+  width: 100%;
+
+  .event_list_item{
+    padding: 27px 35px;
+    border-bottom: 1px solid #d2d2d2;
+    a {
+      color: @text-color-default;
+    }
+    .time_and_date{
+      color: @green-color;
+      font-weight: bold;
+      font-family: Oswald;
+    }
+  }
+}
