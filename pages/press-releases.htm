@@ -19,7 +19,7 @@ pageNumber = "{{ :page }}"
 use Pensoft\Media\Models\Pressreleases;
 
 function onStart(){
-	$this['mediaPressreleasesList'] =  Pressreleases::get();
+	$this['mediaPressreleasesList'] =  Pressreleases::orderBy('date', 'desc')->get();
 }
 ?>
 ==
