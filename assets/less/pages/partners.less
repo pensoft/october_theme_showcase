@@ -16,6 +16,11 @@ ul.partners_logos_list li{
   background: @secondary-color;
   border-radius: 50%;
   padding: 20px;
+  width: 119px;
+  height: 119px;
+  line-height: 119px;
+  justify-content: center;
+  align-items: center;
   .breakpoint-small-down({
     margin: 17px 4px 0 4px;
   });
@@ -26,6 +31,11 @@ ul.partners_logos_list li{
 ul.partners_logos_list li {
   margin-top: 1rem;
   transition: all .3s ease-in-out;
+  a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 ul.partners_logos_list li:hover{
@@ -38,16 +48,18 @@ ul.partners_logos_list li:hover{
 }
 
 .partner_cover.width{
-  height: 119px;
-  width: 119px;
-  line-height: 140px!important;
+  //height: 119px;
+  //width: 119px;
+  //line-height: 140px!important;
 }
 
 .partner_cover.height{
-  text-align: center;
-  height: 119px;
-  width: 119px;
-  line-height: 185px!important;
+  //text-align: center;
+  //height: 119px;
+  //width: 119px;
+  //line-height: 185px!important;
+  //width: 100%;
+  //text-align: center;
 }
 
 .fill_default.fill_ES:hover,
@@ -233,4 +245,19 @@ ul.partners_logos_list li:hover{
   }
 
 
+}
+
+#mycomponentpartners, .newslist {
+  .edit-link{
+    display: none;
+  }
+}
+
+#mycomponentpartners{
+  .list-item-image{
+    display: none;
+  }
+  .info{
+    display: none;
+  }
 }

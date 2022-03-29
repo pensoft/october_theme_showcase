@@ -1,9 +1,58 @@
+<div class="list">
+	{% for partner in partners %}
+	<div class="list-item align-items-start row" style="margin-top: 0;">
+		<div class="list-item-column col-xs-12 col-md">
+			{% if partner.instituion %}
+			<h3>{%if partner.instituion_url %}<a href="{{partner.instituion_url}}" target="_blank">{% endif %}{{partner.instituion}}{%if partner.instituion_url %}</a>{% endif %}</h3>
+			{% endif %}
+			<div class="list-item-body">
+				{{partner.content|raw}}
+			</div>
+			{% if insider_members.getIM(partner.id).count > 0 %}
+			<div id="accordion-insider-members">
+				<div class="accordion-border">
+					<div class="row middle-xs accordion-toggle">
+						<div class="col-xs start-xs"><span class="showmembers">Show members</span></div>
+						<div class="col-xs-2 end-xs"><span class="plusminus">+</span></div>
+					</div>
+					<div class="accordion-content" style="display: none;">
+						<p style="text-align: justify;">
+							{% for profile in insider_members.getIM(partner.id) %}
+						<div class="row middle-xs">
+							<div class="col-xs-12 col-md-12">
+								<div class="contact_info row">
+									<div class="col-md-3 col-xs-12 coordinator_image">
+										{% if profile.avatar %}
+										<img alt="{{ profile.names }}" src="{{profile.avatar.thumb(120,120,{'mode':'crop'})}}">
+										{% else %}
+										<img alt="{{ profile.names }}" src="{{ 'CMS_icons_avatar.svg'|media }}" width="70" height="70">
+										{% endif %}
+									</div>
+									<div class="col-md-9 col-xs-12 coordinator_info">
+										<h3>{{ profile.names }}</h3>
+										{% if profile.position %}<h4> {{ profile.position }}</h4>{% endif %}
+										{% if profile.email %}<p><a href="mailto:{{ profile.email }}"><i class="pr normal p-mail"></i> {{ profile.email }}</a></p>{% endif %}
 
-<div class="news-container">
-	<div class="news-title">
-		<h3 class="card-title">{{title}}</h3>
+												<p>{{ profile.content|raw }}</p>
+											</div>
+										</div>
+
+									</div>
+
+
+
+						</div>
+
+						{% endfor %}
+						</p>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+
+		</div>
+
 	</div>
-	<div class="info"><i class="pr normal p-location"></i> {{myVar}} {{ [inst , city.name , country.name]|filter(v => v is not null)|join(', ') }} </div>
-	<div class="info"><i class="pr normal p-mail"></i> <a href="mailto:{{email}}">Contact</a></div>
-	<div class="body">{{body|raw}}</div>
+	{% endfor %}
 </div>
+
