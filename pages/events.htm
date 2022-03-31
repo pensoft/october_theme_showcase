@@ -10,6 +10,7 @@ default = "true"
 limit = 10
 category = "null"
 language = "en"
+
 ==
 <?php
 use ChristophHeich\Calendar\Models\Entry;
@@ -43,6 +44,7 @@ function onStart(){
 	//$this['SelectedLanguage'] = App::getLocale();
     //$this['slug'] = !(is_numeric($this->param('slug')) || $this->param('slug') == null);
 	$this['entries'] = Entry::where('start', '>', Carbon::now())->orderBy('start', 'asc')->paginate(20);
+	$this['past_entries'] = Entry::where('start', '<', Carbon::now())->orderBy('start', 'desc')->get();
     $this['slug'] = $this->param('slug');
 }
 ?>
@@ -76,8 +78,26 @@ function onStart(){
 		<div class="row container">
 			{{ entries.fragment('listView').render|raw }}
 		</div>
+		<h1 style="margin-top: 50px; width: 100%;">Past events</h1>
+		<div class="events_list_container">
+			{% for entry in past_entries %}
+			{% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+
+			<div class="event_list_item">
+				<div class="row between-xs time_and_date">
+					<div class="col-md start-md col-xs-12 center-xs">{{entry.event_date}}</div>
+					<div class="col-md end-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 start-md col-xs-12 center-xs"><a class="button" href="{{ url }}" target="_blank">{{entry.title}}</a></div>
+				</div>
+			</div>
+
+			{% endfor %}
+		</div>
 
 	</div>
+
 {% else %}
 
     {% if entry %}
