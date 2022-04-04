@@ -124,6 +124,25 @@ $(document).ready(function() {
 	$('#mycomponentpartners .btn.btn-primary').hide();
 
 
+	$('.advisory-board-container2 .card-body .body').each(function(){
+		var countParagraphs = $(this).find('p').length;
+		if(countParagraphs > 1) {
+			$(this).find('p').first().append('<div class="dorsal">Read more</div>');
+			$(this).find('p:not(:first)').wrapAll("<div class='toogle-contact-paragraphs'></div>")
+		}
+	});
+
+	$('.dorsal').click(function () {
+		var link = $(this);
+		link.parent().parent().find('.toogle-contact-paragraphs').slideToggle('slow', function() {
+			if ($(this).is(':visible')) {
+				link.text('Read less');
+			} else {
+				link.text('Read more');
+			}
+		});
+
+	});
 
 
 
@@ -260,7 +279,9 @@ function onPartners(pCode) {
 
 $(window).scroll(function(){
 	var tooltip = document.getElementById("tooltip");
-	tooltip.classList.remove("active");
+	if(tooltip){
+		tooltip.classList.remove("active");
+	}
 });
 
 function handleSVGMapMouseMove(event) {
