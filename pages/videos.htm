@@ -60,7 +60,7 @@ return Redirect::to('/media-center/videos');
 		{% for record in records %}
 		{# Use spaceless tag to remove spaces inside the A tag. #}
 		{% spaceless %}
-		<div class="col-xs-12 col-md-12" id="accordion-documents">
+		<div class="col-xs-12 col-md-6" id="accordion-documents">
 			<p>{{record.name}}</p>
 			{% if record.file %}
 			<video controls="" height="360px" width="570px"><source src="{{record.file.path}}" type="video/mp4"></video>
