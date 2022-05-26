@@ -62,6 +62,7 @@ function onStart(){
 		<div class="events_list_container">
 			{% for entry in entries %}
 			{% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+			{% set target = entry.url ?  '_blank' : '_self' %}
 
 			<div class="event_list_item">
 				<div class="row between-xs time_and_date">
@@ -69,7 +70,7 @@ function onStart(){
 					<div class="col-md end-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12 start-md col-xs-12 center-xs"><a class="button" href="{{ url }}" target="_blank">{{entry.title}}</a></div>
+					<div class="col-md-12 start-md col-xs-12 center-xs"><a class="button" href="{{ url }}" target="{{target}}">{{entry.title}}</a></div>
 				</div>
 			</div>
 
@@ -82,6 +83,7 @@ function onStart(){
 		<div class="events_list_container">
 			{% for entry in past_entries %}
 			{% set url = entry.url ?  entry.url : '/events/' ~ entry.slug %}
+			{% set target = entry.url ?  '_blank' : '_self' %}
 
 			<div class="event_list_item">
 				<div class="row between-xs time_and_date">
@@ -89,7 +91,7 @@ function onStart(){
 					<div class="col-md end-md col-xs-12 center-xs">{{entry.start|date('l')}}</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12 start-md col-xs-12 center-xs"><a class="button" href="{{ url }}" target="_blank">{{entry.title}}</a></div>
+					<div class="col-md-12 start-md col-xs-12 center-xs"><a class="button" href="{{ url }}" target="{{target}}">{{entry.title}}</a></div>
 				</div>
 			</div>
 
@@ -105,7 +107,6 @@ function onStart(){
         <h1>{{ entry.title }}</h1>
         <div class="text-published mt-2">
             {{entry.event_date}}
-            {{entry.event_time}}
         </div>
         <div class="text bold mt-2">{{ entry.place }}</div>
         <div class="event-container d-flex">
