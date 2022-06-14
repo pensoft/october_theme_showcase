@@ -63,7 +63,7 @@ return Redirect::to('/media-center/logo');
 		{% if record.logo_image %}
 			<div class="row">
 				<div class="col-xs-12">
-						<p><img src="{{record.logo_image.path}}" title="{{record.name}}" style="max-width: 350px;"></p>
+						<p style="text-align: center;"><img src="{{record.logo_image.path}}" title="{{record.name}}" style="max-width: 350px;"></p>
 				</div>
 
 				{% if record.file_jpg %}
