@@ -144,6 +144,16 @@ $(document).ready(function() {
 
 	});
 
+	$('#libraryForm select[name="Filter[type]"]').change(function(){
+        $('#removeDivId').remove();
+        if($(this).find('option:selected').val() == 1){
+            $('#partialLibraries').before('<div style="margin-top: 40px; margin-bottom: 40px;" id="removeDivId">Please keep in mind that the content of all of SHOWCASE\'s deliverables is subject to change.</div>');
+        }else{
+            $('#removeDivId').remove();
+        }
+    });
+
+
 
 
 });
@@ -204,7 +214,7 @@ function init() {
         if (isBreakpointLarge()) {
             $('#card-carousel').slick('unslick');
         } else {
-            if (typeof cardCarousel === 'function') { 
+            if (typeof cardCarousel === 'function') {
                 cardCarousel({
                     slidesToShow: 3,
                     slidesToScroll: 3,
@@ -220,7 +230,7 @@ function init() {
     });
     document.addEventListener('DOMContentLoaded', function () {
         if (!isBreakpointLarge()) {
-            if (typeof cardCarousel === 'function') { 
+            if (typeof cardCarousel === 'function') {
                 cardCarousel({
                     slidesToShow: 3,
                     slidesToScroll: 3,
