@@ -69,7 +69,7 @@ return Redirect::to('/media-center/newsletters');
 			<div class="media-size text-center">{{record.name}}</div>
 			<div class="text-published" style="text-align: center;">{{record.date |date('F Y')}}</div>
 			{% if record.file %}
-			<div class="media-btn_broshure_and_poster text-center mt-1 mb-1"><a class="btn btn-secondary" href="{{ ''| page }}?{{queries}}&download={{record.file.id}}&file_name={{record.name|replace({' ': '_'})}}">Download</a></div>
+			<div class="media-btn_broshure_and_poster text-center mt-1 mb-1"><a class="btn btn-secondary" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
 
 
 			{% endif %}
