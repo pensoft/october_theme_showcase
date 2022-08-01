@@ -7,7 +7,7 @@ robot_follow = "follow"
 
 [calendar]
 default = "true"
-limit = 10
+limit = null
 category = "null"
 language = "en"
 
@@ -35,11 +35,11 @@ function onStart(){
 			DB::raw("
 				\"end\" is not null as has_end
 			")
-			
-			
+
+
 		)->where('slug', $this->param('slug'))->first();
 	}
-    
+
     //$slug = (int)$this->param('slug') ? (int)$this->param('slug') : 1;
 	//$this['SelectedLanguage'] = App::getLocale();
     //$this['slug'] = !(is_numeric($this->param('slug')) || $this->param('slug') == null);
@@ -122,7 +122,7 @@ function onStart(){
         <a class="mt-2 button" href="{{ entry.url }}" target="_blank">{{ 'To the event'|_ }}</a>
         {% endif %}
     </div>
-    
+
     {% else %}
     {% endif %}
 
