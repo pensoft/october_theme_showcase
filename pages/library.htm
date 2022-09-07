@@ -27,15 +27,12 @@ $library =Library::isVisible();
 if(post('Filter')){
     switch (post('Filter')['type']){
         case 1:
-            $library =Library::isVisible()->ofType(5)->where('status', 1);
+            $library =Library::isVisible()->ofType(5);
         break;
         case 2:
-            $library =Library::isVisible()->ofType(5)->whereIn('status', [2,3,4]);
-        break;
-        case 3:
             $library =Library::isVisible()->ofType(1)->where('derived', 2);
         break;
-        case 4:
+        case 3:
             $library =Library::isVisible()->ofType(1)->where('derived', 1);
         break;
     }
@@ -54,10 +51,9 @@ if(post('Filter')){
 $this['records'] = $library->get();
 $this['sortOptions'] = Library::$allowSortingOptions;
 $this['filterTypesOptions'] = [
-1 => 'Deliverables - Approved',
-2 => 'Deliverables - Subject to change',
-3 => 'Relevant Publications',
-4 => 'SHOWCASE Publications',
+1 => 'Deliverables',
+2 => 'Relevant Publications',
+3 => 'SHOWCASE Publications',
 ];
 $this['total_file_size_bites'] = $this['records']->reduce(function ($carry, $item) {
                                                         if ($item->file) {
@@ -82,7 +78,7 @@ $this['total_file_size'] = $this['total_file_size_bites'];
     </div>
     {%endif%}
 
-    {{ form_ajax('onStart', { update: {'@libraries': '#partialLibraries'} }) }}
+    {{ form_ajax('onStart', { update: {'components/libraries': '#partialLibraries'} }) }}
 
     <div id="libraryForm" class="ui form libraryForm">
         <div class="row">
@@ -130,8 +126,16 @@ $this['total_file_size'] = $this['total_file_size_bites'];
                 </div>
                 <div class="body">
                     {% partial __SELF__ ~ "::libraries-content" label="Authors:" value=record.authors %}
-
-                    {% partial __SELF__ ~ "::libraries-content" label="Status:" value=record.status_attr %}
+                    {% if record.type == 5 %}
+                        {% if record.status == 1 %}
+                            {% set status = 'Approved' %}
+                        {% else %}
+                            {% set status = 'Subject to change' %}
+                        {% endif %}
+                    {% else %}
+                        {% set status = record.status_attr %}
+                    {% endif %}
+                    {% partial __SELF__ ~ "::libraries-content" label="Status:" value=status %}
                     {% partial __SELF__ ~ "::libraries-content" label="Year:" value=record.year_attr %}
 
                     {% partial __SELF__ ~ "::libraries-content" label="Journal:" value=record.journal_title %}
