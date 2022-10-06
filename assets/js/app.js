@@ -19,7 +19,7 @@ $(document).ready(function() {
 	var loggedInMenuNavbar = $('.navbar-loggedin-user');
 	loggedInMenuNavbar.find('#menu').removeAttr('id');
 
-	$('body').on('click', '.work_packages .accordion-toggle, #mycomponentpartners .accordion-toggle', function () {
+	$('body').on('click', '.work_packages .accordion-toggle, #mycomponentpartners .accordion-toggle, .messages .accordion-toggle', function () {
 		console.log($(this).children().find(".showmembers"));
 		if ($(this).next(".accordion-content").is(':visible')) {
 			$(this).next(".accordion-content").slideUp(300);
@@ -142,7 +142,7 @@ $(document).ready(function() {
 		});
 
 	});
-	
+
     $('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
         '<a class="folder-background" target="_blank" style="display:flex; background: url(https://showcase-project.eu/storage/app/media/publications-table.svg) center center no-repeat; background-size: 150px;" href="https://docs.google.com/spreadsheets/d/1O_RKlOjrAH9N7h5L6odYp-HZ_YbcUTUnTAQWC5T2c7Y/edit#gid=0" title="Publication table"></a>\n' +
         '<h3 class="card-header"><a href="https://docs.google.com/spreadsheets/d/1O_RKlOjrAH9N7h5L6odYp-HZ_YbcUTUnTAQWC5T2c7Y/edit#gid=0" target="_blank" title="Publication table">Publication table</a></h3>\n' +
