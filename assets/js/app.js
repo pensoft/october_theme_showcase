@@ -571,4 +571,37 @@ function handleSVGMapMouseMove(event) {
 
 }
 
+
+function initMailingTooltip(){
+    var searchStr = '';
+    $('.inputWithTooltip span').each(function(i, obj) {
+        $(this).addClass('mailing_list_tooltip_'+i);
+        searchStr = $.trim($(obj).text());
+        $.request('onFetchMailingList', {
+            update: { 'mailing_list': '#mailing_list_tooltip_content_'+i,
+            },
+            data: {
+                search_str: searchStr
+            },
+        }).then(response => {
+            $('<div id="mailing_list_tooltip_content_'+i+'" style="display: none;"></div>' +
+                '<script>createTippy(\'.row:nth-of-type(3) .row:nth-of-type(2) span.mailing_list_tooltip_' + i + '\', {' +
+                'placement: \'left\',\n' +
+                'content: \'' + response.mailing_list + '\'})</script>').insertAfter(this);
+        });
+    });
+}
+
+function createTippy(element, options) {
+    return new Promise(resolve => {
+        tippy(element, Object.assign({}, {
+            allowHTML: true,
+            interactive: true,
+            animation: 'scale',
+            theme: 'light',
+        }, options));
+        resolve();
+    });
+}
+
 init()
