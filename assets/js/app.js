@@ -573,9 +573,10 @@ function handleSVGMapMouseMove(event) {
 
 function initMailingTooltip(){
     var searchStr = '';
-    $('.inputWithTooltip span').each(function(i, obj) {
-        $(this).addClass('mailing_list_tooltip_'+i);
+    $('.group-holder').eq(0).find('.inputWithTooltip span').each(function(i, obj) {
+        $('<img src="/storage/app/media/CMS_icons_groups.svg" style="max-width: 16px; margin-right: 5px;" class="icon mailing_list_tooltip_'+i+'" />').insertBefore(this);
         searchStr = $.trim($(obj).text());
+        //groups
         $.request('onFetchMailingList', {
             update: { 'mailing_list': '#mailing_list_tooltip_content_'+i,
             },
@@ -583,10 +584,25 @@ function initMailingTooltip(){
                 search_str: searchStr
             },
         }).then(response => {
-            $('<div id="mailing_list_tooltip_content_'+i+'" style="display: none;"></div>' +
-                '<script>createTippy(\'.row:nth-of-type(3) .row:nth-of-type(2) span.mailing_list_tooltip_' + i + '\', {' +
+            $('<script>createTippy(\'.row:nth-of-type(3) .row:nth-of-type(2) .mailing_list_tooltip_' + i + '\', {' +
                 'placement: \'left\',\n' +
                 'content: \'' + response.mailing_list + '\'})</script>').insertAfter(this);
+        });
+    });
+    $('.group-holder').eq(1).find('.inputWithTooltip span').each(function(i, obj) {
+        $('<img src="/storage/app/media/CMS_icons_individuals.svg" style="max-width: 16px; margin-right: 5px;" class="icon mailing_list_tooltip_individuals_'+i+'" />').insertBefore(this);
+        searchStr = $.trim($(obj).text());
+        //individuals
+        $.request('onFetchSingleMail', {
+            update: { 'individual_email': '#individual_tooltip_content_'+i,
+            },
+            data: {
+                search_str: searchStr
+            },
+        }).then(response => {
+            $('<script>createTippy(\'.row:nth-of-type(4) .row:nth-of-type(2) .mailing_list_tooltip_individuals_' + i + '\', {' +
+                'placement: \'left\',\n' +
+                'content: \'' + response.individual_email + '\'})</script>').insertAfter(this);
         });
     });
 }

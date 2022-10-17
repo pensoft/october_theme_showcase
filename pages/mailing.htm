@@ -21,15 +21,19 @@ use RainLab\User\Models\User;
 
 function onFetchMailingList(){
 	if(post('search_str')){
-	    //$users = User::whereRaw('users.email ILIKE \''.post('search_str').'\'')->get();
 
-$this['result'] = DB::table('pensoft_mailing_groups')
-->leftJoin('pensoft_mailing_groups_users', 'pensoft_mailing_groups_users.groups_id', '=', 'pensoft_mailing_groups.id')
+	    $this['result'] = DB::table('pensoft_mailing_groups')
+            ->leftJoin('pensoft_mailing_groups_users', 'pensoft_mailing_groups_users.groups_id', '=', 'pensoft_mailing_groups.id')
 ->leftJoin('users', 'pensoft_mailing_groups_users.user_id', '=', 'users.id')
 ->whereRaw('users.email ILIKE \''.post('search_str').'\' OR pensoft_mailing_groups.name ILIKE \''.post('search_str').'\'')
 ->select('users.*')
-//->union($users)
 ->get();
+}
+}
+
+function onFetchSingleMail(){
+if(post('search_str')){
+$this['item']  = DB::table('users')->whereRaw('(TRIM(CONCAT(users.name, \' \', users.surname)) = \''.post('search_str').'\') OR users.email ILIKE \''.post('search_str').'\' ')->first();
 }
 }
 
