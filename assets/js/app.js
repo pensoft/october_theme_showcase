@@ -20,7 +20,6 @@ $(document).ready(function() {
 	loggedInMenuNavbar.find('#menu').removeAttr('id');
 
 	$('body').on('click', '.work_packages .accordion-toggle, #mycomponentpartners .accordion-toggle, .messages .accordion-toggle', function () {
-		console.log($(this).children().find(".showmembers"));
 		if ($(this).next(".accordion-content").is(':visible')) {
 			$(this).next(".accordion-content").slideUp(300);
 			$(this).children().find(".plusminus").text('+');

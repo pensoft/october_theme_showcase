@@ -5,7 +5,10 @@
 <form
 		class="ui form"
 		method="post"
-		data-request="onRestorePassword">
+		data-request="onRestorePassword"
+        data-request-success="alert('Password reset request has been sent. Please check you email!');"
+        data-request-redirect="/login"
+>
 	<div class="field">
 		<label for="userRestoreEmail">Email</label>
 		<input name="email" type="email" id="userRestoreEmail" placeholder="Enter your email">

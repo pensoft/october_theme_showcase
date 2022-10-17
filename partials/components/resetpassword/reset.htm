@@ -4,11 +4,14 @@
 
 <form
 		class="ui form"
-		data-request="onResetPassword">
+		data-request="onResetPassword"
+        data-request-success="alert('You have successfully changed your password. Please login to the Internal Repository.');"
+        data-request-redirect="/login"
+>
 	<div class="fields">
 		<div class="field">
 			<label for="resetCode">Activation Code</label>
-			<input name="code" type="text" id="resetCode" placeholder="Enter the activation code" value="{{ code }}">
+			<input name="code" type="text" id="resetCode" placeholder="Enter the activation code" value="{{ get('reset') }}">
 		</div>
 
 		<div class="field">
