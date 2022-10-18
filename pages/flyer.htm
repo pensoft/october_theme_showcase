@@ -21,7 +21,11 @@ use System\Models\File;
 use Redirect;
 
 function onStart(){
-	$this['mediaFlyersList'] =  Flyers::get();
+	$this['mediaFlyersList'] =  Flyers::where('name', 'not ILIKE', '%brochure%')->where('name', 'not ILIKE', '%poster%')->get();
+	$this['brochures'] =  Flyers::orderBy('name')->where('name', 'ILIKE', '%brochure%')->get();
+	$this['brochureEN'] =  Flyers::orderBy('name')->where('name', 'ILIKE', '%brochure EN%')->first();
+    $this['posters'] =  Flyers::orderBy('name')->where('name', 'ILIKE', '%poster%')->get();
+    $this['posterEN'] =  Flyers::orderBy('name')->where('name', 'ILIKE', '%poster EN%')->first();
 	if(get('download')){
 		$file = File::find((int)get('download'));
 		$file_name = $file->getLocalPath();
@@ -46,6 +50,7 @@ function onStart(){
 		return Redirect::to('/media-center/flyer');
 	}
 
+
 }
 ?>
 ==
@@ -58,23 +63,68 @@ function onStart(){
 	{% set detailsKeyColumn = mediaFlyersList.detailsKeyColumn %}
 	{% set detailsUrlParameter = mediaFlyersList.detailsUrlParameter %}
 
-	{% for record in records %}
-	{# Use spaceless tag to remove spaces inside the A tag. #}
-	{% spaceless %}
-	{% if record.flyer_image %}
-		<div class="col-xs-12 col-lg-4">
-			<div class="story broshure_and_poster">
-				<p align="center"><a href="{{record.file.path}}" target="_blank"><img src="{{record.flyer_image.thumb(250,250,{'mode':'crop'})}}" title="{{record.name}}"> </a></p>
-			</div>
-			<div class="media-size text-center">{{record.name}}</div>
-			{% if record.file %}
-			<div class="media-btn_broshure_and_poster text-center mt-1 mb-1"><a class="btn btn-secondary" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
+        <div class="col-xs-12 col-lg-4">
+            <div class="story broshure_and_poster">
+                <p align="center"><a href="{{brochureEN.file.path}}" target="_blank"><img src="{{brochureEN.flyer_image.thumb(250,250,{'mode':'crop'})}}" title="{{brochureEN.name}}"> </a></p>
+            </div>
+            <div class="media-size text-center">SHOWCASE brochure</div>
+            <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
+            {% for brochure in brochures %}
 
-			<div class="media-size text-center">{{record.file.extension | uppercase}} {{record.file.size }}</div>
-			{% endif %}
-		</div>
-	{% endif %}
+            {# Use spaceless tag to remove spaces inside the A tag. #}
+            {% spaceless %}
+            {% set languages = brochure.name|split(' ') %}
+            {% if brochure.file %}
+                <a class="btn btn-secondary" style="padding: 4px 10px;" href="{{ brochure.file.path }}#{{brochure.file.file_name}}" target="_blank">{{languages[2]}}</a>
+            {% endif %}
+            {% endspaceless %}
+            {% endfor%}
+            </div>
+            <div class="media-size text-center">{{brochureEN.file.extension | uppercase}} {{brochureEN.file.size }}</div>
 
+        </div>
+
+        <div class="col-xs-12 col-lg-4">
+            <div class="story broshure_and_poster">
+                <p align="center"><a href="{{posterEN.file.path}}" target="_blank"><img src="{{posterEN.flyer_image.thumb(250,250,{'mode':'crop'})}}" title="{{posterEN.name}}"> </a></p>
+            </div>
+            <div class="media-size text-center">SHOWCASE poster</div>
+            <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
+                {% for poster in posters %}
+
+                {# Use spaceless tag to remove spaces inside the A tag. #}
+                {% spaceless %}
+                {% set languages = poster.name|split(' ') %}
+                {% if poster.file %}
+                <a class="btn btn-secondary" style="padding: 4px 10px;" href="{{ poster.file.path }}#{{poster.file.file_name}}" target="_blank">{{languages[2]}}</a>
+                {% endif %}
+                {% endspaceless %}
+                {% endfor%}
+            </div>
+            <div class="media-size text-center">{{posterEN.file.extension | uppercase}} {{posterEN.file.size }}</div>
+
+        </div>
+
+
+<!--        //stickers and others-->
+        {% for record in records %}
+
+        {# Use spaceless tag to remove spaces inside the A tag. #}
+        {% spaceless %}
+            {% if record.flyer_image %}
+            <div class="col-xs-12 col-lg-4">
+                <div class="story broshure_and_poster">
+                    <p align="center"><a href="{{record.file.path}}" target="_blank"><img src="{{record.flyer_image.thumb(250,250,{'mode':'crop'})}}" title="{{record.name}}"> </a></p>
+                </div>
+                <div class="media-size text-center">{{record.name}}</div>
+                {% if record.file %}
+                <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
+                    <a class="btn btn-secondary" style="padding: 5px 18px;" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
+
+                <div class="media-size text-center">{{record.file.extension | uppercase}} {{record.file.size }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
 	{% endspaceless %}
 	{% else %}
 	{{ noRecordsMessage }}
