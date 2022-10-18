@@ -605,6 +605,9 @@ function initMailingTooltip(){
                 'content: \'' + response.individual_email + '\'})</script>').insertAfter(this);
         });
     });
+    
+    $('.group-holder').eq(0).prepend( "<p style='margin-left: 10px; width: 100%;'>Prior to sending group emails, please make sure that all individuals you want to contact have been included in the respective group by hovering over the group icon.</p><p></p>" );
+    $('.group-holder').eq(1).prepend( "<p style='margin-left: 10px; width: 100%;'>To see each person’s email, hover over the account icon.</p><p></p>" );
 }
 
 function createTippy(element, options) {
