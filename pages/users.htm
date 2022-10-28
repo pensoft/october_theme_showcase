@@ -17,7 +17,8 @@ use Rainlab\User\Models\User;
 use RainLab\User\Models\UserGroup;
 
 function onStart(){
-	$users = User::select('users.*', 'pensoft_partners_partners.instituion', 'pensoft_partners_partners.instituion_url')->where('is_activated', true)->join('pensoft_partners_partners', 'pensoft_partners_partners.id', 'users.partner_id')->get();
+	$users = User::select('users.*', 'pensoft_partners_partners.instituion', 'pensoft_partners_partners.instituion_url')->where('is_activated', true)
+->join('pensoft_partners_partners', 'pensoft_partners_partners.id', 'users.partner_id')->orderBy('name')->orderBy('surname')->get();
 	$this['users'] = $users;
 }
 ?>
