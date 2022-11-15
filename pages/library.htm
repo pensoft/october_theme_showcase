@@ -19,15 +19,15 @@ function onStart(){
 	extract(
             array_merge([
                 'sort' => 'created_at desc',
-            'type' => 0,
+                'type' => 0,
             ], $options)
     );
-$library =Library::isVisible();
+$library =Library::where('is_visible', true)->orderBy('year', 'desc');
 
 if(post('Filter')){
     switch (post('Filter')['type']){
         case 1:
-            $library =Library::isVisible()->ofType(5);
+            $library =Library::isVisible()->ofType(5)->orderBy('title', 'asc');
         break;
         case 2:
             $library =Library::isVisible()->ofType(1)->where('derived', 2);
@@ -45,17 +45,19 @@ if(post('Filter')){
 }
 
 
+$this['data'] = $library->get();
 
+$this['mySortOptions'] = [
+'year desc' => 'Year (desc)',
+'year asc' => 'Year (asc)',
+];
 
-
-$this['records'] = $library->get();
-$this['sortOptions'] = Library::$allowSortingOptions;
 $this['filterTypesOptions'] = [
 1 => 'Deliverables',
 2 => 'Relevant Publications',
 3 => 'SHOWCASE Publications',
 ];
-$this['total_file_size_bites'] = $this['records']->reduce(function ($carry, $item) {
+$this['total_file_size_bites'] = $this['data']->reduce(function ($carry, $item) {
                                                         if ($item->file) {
                                                             return $carry + $item->file->file_size;
                                                         }
@@ -95,7 +97,7 @@ $this['total_file_size'] = $this['total_file_size_bites'];
             <div class="col-sm-2 col-xs">
                 <div class="field">
                     <select name="Filter[sort]">
-                        {% for code,option in sortOptions %}
+                        {% for code,option in mySortOptions %}
                         <option value="{{code}}">{{option}}</option>
                         {% endfor %}
                     </select>
@@ -107,7 +109,7 @@ $this['total_file_size'] = $this['total_file_size_bites'];
     {{ form_close() }}
 
     <div class='library-items' id="partialLibraries">
-        {% for record in records %}
+        {% for record in data %}
         <div class="library-item row center-xs start-sm">
 
             {% if record.preview %}
