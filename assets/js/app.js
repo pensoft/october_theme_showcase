@@ -151,6 +151,11 @@ $(document).ready(function() {
 		'<a class="folder-background" style="display:flex; background: url(https://showcase-project.eu/storage/app/media/dissemination-forms.svg) center center no-repeat; background-size: 100px; height: 200px" href="/internal-repository/dissemination-report-forms" title="Reporting forms"></a>\n' +
 		'<h3 class="card-header"><a href="/internal-repository/dissemination-report-forms" title="Reporting forms">Reporting forms</a></h3>\n' +
 		'</div>').insertAfter($('.card.internal:nth-child(2)'));
+		
+	$('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
+        '<a class="folder-background" target="_blank" style="display:flex; background: url(https://showcase-project.eu/storage/app/media/Relevant-content.svg) center center no-repeat; background-size: 150px;" href="https://docs.google.com/spreadsheets/d/1keGpeMxdG6xHkkoyLiZhM7K-pMR-wpfNPRNr4_8QHNA/edit#gid=0" title="Relevant content"></a>\n' +
+        '<h3 class="card-header"><a href="https://docs.google.com/spreadsheets/d/1keGpeMxdG6xHkkoyLiZhM7K-pMR-wpfNPRNr4_8QHNA/editt#gid=0" target="_blank" title="Relevant content">Relevant content</a></h3>\n' +
+        '</div>').insertAfter($('.card.internal').last());
 
 	// $('#libraryForm select[name="Filter[type]"]').change(function(){
     //     $('#removeDivId').remove();
