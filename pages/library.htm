@@ -27,7 +27,7 @@ $library =Library::where('is_visible', true)->orderBy('year', 'desc');
 if(post('Filter')){
     switch (post('Filter')['type']){
         case 1:
-            $library =Library::isVisible()->ofType(5)->orderByRAW('LENGTH(title) ASC')->orderBy('title', 'ASC');
+            $library =Library::isVisible()->ofType(5)->orderByRAW("nullif(regexp_replace(title, '[^0-9]', '', 'g'),'')::int")->orderBy('title', 'ASC');
         break;
         case 2:
             $library =Library::isVisible()->ofType(1)->where('derived', 2);
