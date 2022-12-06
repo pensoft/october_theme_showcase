@@ -295,6 +295,80 @@
 }
 
 
+/*
+*/
+
+.accordion_all_members{
+    list-style-type: none;
+    padding: 0;
+    margin: 50px 0 0 0;
+}
+
+.accordion_all_members .accordion-border{
+    background: #e0e2e0;
+    border: none;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 10px 0 20px 0;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: Muli;
+    color: @default-color;
+}
+
+.accordion_all_members .accordion-toggle{
+    background: none;
+    border: none;
+    border-radius: unset;
+    padding: 0;
+    font-family: Oswald;
+    color: @default-color;
+    font-size: 1.2em;
+
+}
+.accordion_all_members .accordion-content{
+    padding-top: 50px;
+
+    .dorsal{
+        display: block;
+        cursor: pointer;
+        color: @link-color;
+        margin-top: 20px;
+    }
+
+    .toogle-contact-paragraphs { display: none; }
+
+    .contact_info{
+        padding: 0 20px;
+    }
+
+}
+
+
+.accordion_all_members .accordion-content p{
+    //margin-bottom: 0;
+    font-size: 16px!important;
+    .breakpoint-large-down({
+        padding: 0!important;
+        text-align: left!important;
+    });
+}
+
+.accordion_all_members .plusminus{
+    width: 30px;
+    height: 29px;
+    text-align: center;
+    vertical-align: middle;
+    background: @green-color;
+    color: @white-color;
+    border-radius: 50%;
+    font-size: 1em;
+    line-height: 1.3em;
+    text-align: center;
+    font-family: 'Muli';
+    padding-bottom: 1px;
+}
+
 
 
 

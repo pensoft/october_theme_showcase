@@ -23,6 +23,7 @@ use Pensoft\Cardprofiles\Models\Profiles;
 
 function onStart(){
 	$this['partners'] =  Partners::where('type', 1)->get();
+    $this['members'] = Profiles::where('category_id',  34)->get();
 
 }
 
@@ -889,6 +890,40 @@ function onPartners(){
 		{% endfor %}
 	</ul>
 
-
+    {% if members.count > 0 %}
+    <div class="accordion_all_members">
+        <div id="accordion-insider-members">
+            <div class="accordion-border">
+                <div class="row middle-xs accordion-toggle">
+                    <div class="col-xs start-xs"><span class="showmembers">Show all members</span></div>
+                    <div class="col-xs-2 end-xs"><span class="plusminus">+</span></div>
+                </div>
+                <div class="accordion-content" style="display: none;">
+                    <div class="row top-xs">
+                        {% for profile in members %}
+                        <div class="col-xs-12 col-md-4">
+                            <div class="contact_info row">
+                                <div class="col-md-12 col-xs-12 coordinator_image">
+                                    {% if profile.avatar %}
+                                    <img alt="{{ profile.names }}" src="{{profile.avatar.thumb(160,160,{'mode':'crop'})}}">
+                                    {% else %}
+                                    <img alt="{{ profile.names }}" src="{{ 'CMS_icons_avatar.svg'|media }}" width="160" height="160">
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-12 col-xs-12 coordinator_info">
+                                    <h3>{{ profile.names }}</h3>
+                                    {% if profile.position %}<h4> {{ profile.position }}</h4>{% endif %}
+                                    {% if profile.email %}<p><a href="mailto:{{ profile.email }}"><i class="pr normal p-mail"></i> {{ profile.email }}</a></p>{% endif %}
+                                    <div class="body">{{ profile.content|raw }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
 </div>

@@ -32,6 +32,19 @@ $(document).ready(function() {
 			$(this).children(".plusminus").html('<span class="minus"></span>');
 		}
 	});
+	$('body').on('click', '.accordion_all_members .accordion-toggle', function () {
+		if ($(this).next(".accordion-content").is(':visible')) {
+			$(this).next(".accordion-content").slideUp(300);
+			$(this).children().find(".plusminus").text('+');
+			$(this).children().find(".showmembers").text('Show all members');
+			$(this).children(".plusminus").html('<span class="plus"></span>');
+		} else {
+			$(this).next(".accordion-content").slideDown(300);
+			$(this).children().find(".plusminus").text('-');
+			$(this).children().find(".showmembers").text('Hide all members');
+			$(this).children(".plusminus").html('<span class="minus"></span>');
+		}
+	});
 
 	$('.dropdown-menu').removeAttr('id');
 
@@ -146,12 +159,12 @@ $(document).ready(function() {
         '<a class="folder-background" target="_blank" style="display:flex; background: url(https://showcase-project.eu/storage/app/media/publications-table.svg) center center no-repeat; background-size: 150px;" href="https://docs.google.com/spreadsheets/d/1O_RKlOjrAH9N7h5L6odYp-HZ_YbcUTUnTAQWC5T2c7Y/edit#gid=0" title="Publication table"></a>\n' +
         '<h3 class="card-header"><a href="https://docs.google.com/spreadsheets/d/1O_RKlOjrAH9N7h5L6odYp-HZ_YbcUTUnTAQWC5T2c7Y/edit#gid=0" target="_blank" title="Publication table">Publication table</a></h3>\n' +
         '</div>').insertAfter($('.card.internal').first());
-        
+
     $('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
 		'<a class="folder-background" style="display:flex; background: url(https://showcase-project.eu/storage/app/media/dissemination-forms.svg) center center no-repeat; background-size: 100px; height: 200px" href="/internal-repository/dissemination-report-forms" title="Reporting forms"></a>\n' +
 		'<h3 class="card-header"><a href="/internal-repository/dissemination-report-forms" title="Reporting forms">Reporting forms</a></h3>\n' +
 		'</div>').insertAfter($('.card.internal:nth-child(2)'));
-		
+
 	$('<div class="col-xs-12 col-sm-3 card internal no-border" style="margin-bottom: 15px">\n' +
         '<a class="folder-background" target="_blank" style="display:flex; background: url(https://showcase-project.eu/storage/app/media/Relevant-content.svg) center center no-repeat; background-size: 150px;" href="https://docs.google.com/spreadsheets/d/1keGpeMxdG6xHkkoyLiZhM7K-pMR-wpfNPRNr4_8QHNA/edit#gid=0" title="Relevant content"></a>\n' +
         '<h3 class="card-header"><a href="https://docs.google.com/spreadsheets/d/1keGpeMxdG6xHkkoyLiZhM7K-pMR-wpfNPRNr4_8QHNA/editt#gid=0" target="_blank" title="Relevant content">Relevant content</a></h3>\n' +
@@ -615,7 +628,7 @@ function initMailingTooltip(){
                 'content: \'' + response.individual_email + '\'})</script>').insertAfter(this);
         });
     });
-    
+
     $('.group-holder').eq(0).prepend( "<p style='margin-left: 10px; width: 100%;'>Prior to sending group emails, please make sure that all individuals you want to contact have been included in the respective group by hovering over the group icon.</p><p></p>" );
     $('.group-holder').eq(1).prepend( "<p style='margin-left: 10px; width: 100%;'>To see each person’s email, hover over the account icon.</p><p></p>" );
 }
