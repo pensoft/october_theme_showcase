@@ -22,7 +22,7 @@ use Pensoft\Partners\Models\Partners;
 use Pensoft\Cardprofiles\Models\Profiles;
 
 function onStart(){
-	$this['partners'] =  Partners::where('type', 1)->get();
+	$this['partners'] =  Partners::where('type', 1)->where('id', '!=', 22)->get();
     $this['members'] = Profiles::where('category_id',  34)->get();
 
 }
@@ -30,7 +30,7 @@ function onStart(){
 function onPartners(){
 	$this['partners'] = [];
 	if(post('code')){
-		$this['partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%\'')->where('type', 1)->get();
+		$this['partners'] =  Partners::whereRaw('country_code ILIKE \'%'.post('code').'%\'')->where('id', '!=', 22)->where('type', 1)->get();
 	}
 	$this['insider_members'] = new class {
 		public function getIM($id) {
