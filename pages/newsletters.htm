@@ -64,12 +64,12 @@ return Redirect::to('/media-center/newsletters');
 		{% if record.newsletter_image %}
 		<div class="col-xs-12 col-lg-4">
 			<div class="story broshure_and_poster">
-				<p align="center"><a href="{{record.file.path}}" target="_blank"><img src="{{record.newsletter_image.thumb(250,250,{'mode':'crop'})}}" title="{{record.name}}"> </a></p>
+				<p align="center"><a href="{{getAWSFile(record.file.path)}}#{{record.file.file_name}}" target="_blank"><img src="{{getAWSFile(record.newsletter_image.path)}}" width="250" height="250" title="{{record.name}}"> </a></p>
 			</div>
 			<div class="media-size text-center">{{record.name}}</div>
 			<div class="text-published" style="text-align: center;">{{record.date |date('F Y')}}</div>
 			{% if record.file %}
-			<div class="media-btn_broshure_and_poster text-center mt-1 mb-1"><a class="btn btn-secondary" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
+			<div class="media-btn_broshure_and_poster text-center mt-1 mb-1"><a class="btn btn-secondary" href="{{getAWSFile(record.file.path)}}#{{record.file.file_name}}" target="_blank">Download</a></div>
 
 
 			{% endif %}

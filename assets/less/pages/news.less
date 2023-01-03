@@ -8,7 +8,7 @@
       color: @green-color!important;
       font-weight: normal;
     }
-    
+
     h1 > a {
         .text-dark;
     }
@@ -28,6 +28,13 @@
 
 .news-image{
   margin-bottom: @margin-base-space;
+}
+
+.news_image{
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .breakpoint-small-down ({
@@ -131,4 +138,13 @@
 
 .newslist{
   align-items: flex-start;
+}
+
+.highlights-news, .newslist {
+    .card-img-top, .news-img-top{
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 }

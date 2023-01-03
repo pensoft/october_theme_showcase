@@ -22,7 +22,7 @@ numberOfLevels = 2
 		<div class="col-xs-12 col-md-9">{% component 'login' %}</div>
 		<div class="col-xs-2 end-xs  col-md-3 hidden-xs">
 			{% if user.avatar %}
-			<a href="/profile" style="color:#555555;" class="profile_name">{{ user.name }} {{ user.surname }} &nbsp; &nbsp; <img alt="{{ user.name }} {{ user.surname }}" src="{{user.avatar.getThumb(30,30, { mode : 'crop' } )}}" style="border-radius: 50%; margin-right:20px;" align="right"> </a>
+			<a href="/profile" style="color:#555555;" class="profile_name">{{ user.name }} {{ user.surname }} &nbsp; &nbsp; <img alt="{{ user.name }} {{ user.surname }}" src="{{getAWSFile(user.avatar.path)}}" style="border-radius: 50%; margin-right:20px; width: 30px; height: 30px; object-fit: cover;" align="right"> </a>
 			{% else %}
 
 			<a href="/profile" style="color:#555555;" class="profile_name"><span>{{ user.name }} {{ user.surname }} &nbsp; &nbsp; </span><img alt="{{ user.name }} {{ user.surname }}" src="{{ 'CMS_icons_avatar.svg'|media }}" width="30" height="30" style="margin-right:20px;" align="right"></a>
@@ -38,7 +38,7 @@ numberOfLevels = 2
 		<span></span>
 		{% component 'menu' %}
 	</div>
-	<a href="{{'home'|page}}" class="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;">
+	<a href="{{'home'|page}}" class="navbar-brand" style="background-image: url('{{ getAWSFile(this.theme.site_logo.getPath()) }}'); background-position: center; background-size: contain;">
 
     </a>
 
@@ -68,7 +68,7 @@ numberOfLevels = 2
     {%if this.page.header_image %}
         <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: bottom center;"></div>
     {%else%}
-        <div class="header-image-bar" style="background-image: url('{{this.theme.header_image.getPath()}}'); background-position: bottom center;"></div>
+        <div class="header-image-bar" style="background-image: url('{{getAWSFile(this.theme.header_image.getPath())}}'); background-position: bottom center;"></div>
     {%endif%}
     <div class="jumbotron px-1" data-aos="fade-up">
         <h1 class="underline white  {% if page_id == 'home'%}home-page-header{% endif %}">{%if page_title%} {{page_title}} {%else%} {{site_name}} {%endif%}</h1>

@@ -113,7 +113,7 @@ function onStart(){
 
             <div class="mt-2">
                 {% if entry.cover_image %}
-                    <img class="mr-2 mb-2 float-right" src="{{entry.cover_image|crop_image|resize(500, auto, {'mode':'crop'})}}" alt="entry.cover_image.title">
+                    <img class="mr-2 mb-2 float-right" src="{{ getAWSFile(entry.cover_image.path) }}" width="500" alt="entry.cover_image.title">
                 {% endif %}
                 {{ entry.description|raw }}
             </div>

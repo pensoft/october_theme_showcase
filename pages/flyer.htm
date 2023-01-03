@@ -65,18 +65,18 @@ function onStart(){
 
         <div class="col-xs-12 col-lg-4">
             <div class="story broshure_and_poster">
-                <p align="center"><a href="{{brochureEN.file.path}}" target="_blank"><img src="{{brochureEN.flyer_image.thumb(250,250,{'mode':'crop'})}}" title="{{brochureEN.name}}"> </a></p>
+                <p align="center"><a href="{{getAWSFile(brochureEN.file.path)}}" target="_blank"><img src="{{getAWSFile(brochureEN.flyer_image.path)}}" width="250" height="250" title="{{brochureEN.name}}"> </a></p>
             </div>
             <div class="media-size text-center">SHOWCASE brochure</div>
             <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
-                Download 
+                Download
                 {% for brochure in brochures %}
 
             {# Use spaceless tag to remove spaces inside the A tag. #}
             {% spaceless %}
             {% set languages = brochure.name|split(' ') %}
             {% if brochure.file %}
-                <a class="btn btn-secondary" style="padding: 4px 10px;" href="{{ brochure.file.path }}#{{brochure.file.file_name}}" target="_blank">{{languages[2]}}</a>
+                <a class="btn btn-secondary" style="padding: 4px 10px;" href="{{getAWSFile(brochure.file.path)}}#{{brochure.file.file_name}}" target="_blank">{{languages[2]}}</a>
             {% endif %}
             {% endspaceless %}
             {% endfor%}
@@ -87,7 +87,7 @@ function onStart(){
 
         <div class="col-xs-12 col-lg-4">
             <div class="story broshure_and_poster">
-                <p align="center"><a href="{{posterEN.file.path}}" target="_blank"><img src="{{posterEN.flyer_image.thumb(250,250,{'mode':'crop'})}}" title="{{posterEN.name}}"> </a></p>
+                <p align="center"><a href="{{getAWSFile(posterEN.file.path)}}" target="_blank"><img src="{{getAWSFile(posterEN.flyer_image.path)}}" width="250" height="250" title="{{posterEN.name}}"> </a></p>
             </div>
             <div class="media-size text-center">SHOWCASE poster</div>
             <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
@@ -98,7 +98,7 @@ function onStart(){
                 {% spaceless %}
                 {% set languages = poster.name|split(' ') %}
                 {% if poster.file %}
-                <a class="btn btn-secondary" style="padding: 4px 10px;" href="{{ poster.file.path }}#{{poster.file.file_name}}" target="_blank">{{languages[2]}}</a>
+                <a class="btn btn-secondary" style="padding: 4px 10px;" href="{{getAWSFile(poster.file.path)}}#{{poster.file.file_name}}" target="_blank">{{languages[2]}}</a>
                 {% endif %}
                 {% endspaceless %}
                 {% endfor%}
@@ -116,12 +116,12 @@ function onStart(){
             {% if record.flyer_image %}
             <div class="col-xs-12 col-lg-4">
                 <div class="story broshure_and_poster">
-                    <p align="center"><a href="{{record.file.path}}" target="_blank"><img src="{{record.flyer_image.thumb(250,250,{'mode':'crop'})}}" title="{{record.name}}"> </a></p>
+                    <p align="center"><a href="{{getAWSFile(record.file.path)}}" target="_blank"><img src="{{getAWSFile(record.flyer_image.path)}}" width="250" height="250" title="{{record.name}}"> </a></p>
                 </div>
                 <div class="media-size text-center">{{record.name}}</div>
                 {% if record.file %}
                 <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
-                    <a class="btn btn-secondary" style="padding: 5px 18px;" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
+                    <a class="btn btn-secondary" style="padding: 5px 18px;" href="{{getAWSFile(record.file.path)}}#{{record.file.file_name}}" target="_blank">Download</a></div>
 
                 <div class="media-size text-center">{{record.file.extension | uppercase}} {{record.file.size }}</div>
                 {% endif %}

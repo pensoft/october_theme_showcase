@@ -12,6 +12,9 @@ maxItems = 10
 title = "News and Events"
 baseUrl = "/news"
 templates = "template2"
+thumb_width = 250
+thumb_height = 250
+useAWSFiles = 1
 
 [publications_list]
 baseUrl = "/news"
@@ -21,12 +24,13 @@ templates = "template2"
 jumbotron = "homepage"
 title = 0
 background = "#ffffff"
+templates = "template1"
+description_limit = 0
 
 [Timeline]
 limit = 3
 upcoming = 1
 ==
-
 <!-- latest from news -->
 {% component 'jumbotron' %}
 <div class="container-fluid banner bg-secondary">
