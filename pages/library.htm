@@ -35,6 +35,9 @@ if(post('Filter')){
         case 3:
             $library =Library::isVisible()->ofType(1)->where('derived', 1);
         break;
+        case 0:
+            $library =Library::isVisible();
+        break;
     }
 
     if(in_array(post('Filter')['sort'], array_keys(Library::$allowSortingOptions))){
