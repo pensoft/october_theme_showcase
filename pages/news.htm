@@ -15,6 +15,7 @@ function urlencode($string){
 }
 function onStart()
 {
+    $this['records'] = Pensoft\Articles\Models\Article::news()->where('published_at', '<=', 'now()')->orderBy('published_at', 'DESC')->paginate(15, ['*'], 'p');
     $this['article'] = Pensoft\Articles\Models\Article::where('slug', $this->param('id'))->first();
     $this['is_detail_page'] = $this['article'] ? true : false;
     $this['allow_share'] = $this['article']['allow_share'] == 'yes' ? true : false;
@@ -31,7 +32,7 @@ function onStart()
         \BennoThommo\Meta\Meta::set('og:url', $this->pageUrl(''));
         if($this['article']['cover']){
             \BennoThommo\Meta\Meta::set('twitter:image', $this['article']['cover']->getThumb(300, 300, ['mode' => 'crop']));
-            
+
             \BennoThommo\Meta\Meta::set('og:image', $this['article']['cover']->getThumb(600, 314, ['mode' => 'crop']));
             \BennoThommo\Meta\Meta::set('og:image:width', 600);
             \BennoThommo\Meta\Meta::set('og:image:height', 314);
@@ -47,11 +48,11 @@ function onStart()
             <div class="col-xs-12">
                 {% if article.cover %}
                     <img class="content left" src="{{ article.cover|crop_image|resize(500, false, { mode: 'crop' }) }}" />
-                    
+
                 {% endif %}
 
                 <div class="news-title">
-                    <h1>{{article.title}}</h1>
+                    <h1>{{article.title|raw}}</h1>
                     {% if article.allow_share == 'yes' %}
                         <div class="share-btn"><i id="share-{{slug}}" class="pr big p-share1"></i></div>
                     {% endif %}
@@ -69,8 +70,34 @@ function onStart()
     {% else %}
         <div class="row">
             <div class="col-xs">
-                {% component 'list' %}
+                <div class="newslist row">
+                    {% for record in records %}
+                    <div class="col-xs-12 col-md-6 news-item item-{{record.slug}}">
+                        <div class="row news_column">
+                            {% if record.image %}
+                            <a class="news-image col-xs-12 center-xs" href="{{'news'|page}}/{{record.slug}}">
+
+                                <img class="news-img-top" src="{{record.image.getThumb(250, 250, {'mode': 'crop'})}}">
+
+                            </a>
+                            {% endif %}
+                            <div class="news-container col-xs-12">
+                                <div class="news-title">
+                                    <h3 class="card-title"><a href="{{'news'|page}}/{{record.slug}}">{{record.title|raw}}</a></h3>
+                                </div>
+                                <div class="text-published">{{record.published_at|date('d F Y')}}</div>
+                                <div class="body">{{ record.content|length > 350 ? record.content|striptags|slice(0, 350) ~ '...' : record.content|raw  }}</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+                </div>
             </div>
         </div>
+    <div class="row container">
+        {{ records.render|raw }}
+    </div>
     {% endif %}
 </div>
