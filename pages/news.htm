@@ -74,10 +74,10 @@ function onStart()
                     {% for record in records %}
                     <div class="col-xs-12 col-md-6 news-item item-{{record.slug}}">
                         <div class="row news_column">
-                            {% if record.image %}
+                            {% if record.cover %}
                             <a class="news-image col-xs-12 center-xs" href="{{'news'|page}}/{{record.slug}}">
 
-                                <img class="news-img-top" src="{{record.image.getThumb(250, 250, {'mode': 'crop'})}}">
+                                <img class="news-img-top" src="{{record.cover.getThumb(250, 250, {'mode': 'crop'})}}">
 
                             </a>
                             {% endif %}
@@ -86,7 +86,13 @@ function onStart()
                                     <h3 class="card-title"><a href="{{'news'|page}}/{{record.slug}}">{{record.title|raw}}</a></h3>
                                 </div>
                                 <div class="text-published">{{record.published_at|date('d F Y')}}</div>
-                                <div class="body">{{ record.content|length > 350 ? record.content|striptags|slice(0, 350) ~ '...' : record.content|raw  }}</div>
+                                <div class="body">
+                                    {% if record.content|striptags|raw|length > 350 %}
+                                        {{ record.content|striptags|truncate(350, true, "...")|raw }}
+                                    {% else %}
+                                        {{ record.content|striptags|raw }}
+                                    {% endif %}
+                                    </div>
                             </div>
                         </div>
 
