@@ -27,11 +27,67 @@ limit = 3
 upcoming = 1
 ==
 
+<?php
+
+use Pensoft\Articles\Models\Article;
+
+function onStart(){
+
+$this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(function($item){
+                        $item->content = str_limit(strip_tags($item->content), 100);
+                        $item->href = $item->slug;
+                        return $item;
+});
+
+}
+
+?>
+==
+
 <!-- latest from news -->
 {% component 'jumbotron' %}
 <div class="container-fluid banner bg-secondary">
-	{% component 'article_highlights' %}
-	<div class="container">
+
+    <div class="container highlights-news">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="base_heading">{{title}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="card-carousel" class="card-carousel">
+                    {% for highlight in highlights %}
+                    <div class="card horizontal mx-1 card-link card-new-item">
+                        <div class="text-published">{{highlight.pretty_published_at}}</div>
+                        {% if highlight.href %}
+                        <a href="{{highlight.href}}">
+                            {% endif %}
+                            {% if highlight.cover %}
+
+                            <img class="card-img-top" src="{{ highlight.cover.thumb(250, 250, {'mode': 'crop'}) }}">
+                            {% endif %}
+                            {% if highlight.content or highlight.title %}
+                            <div class="card-body">
+                                {% if highlight.title %}
+                                <h3 class="card-title">{{highlight.title|raw}}</h3>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+
+                            {% if highlight.href %}
+                        </a>
+                        {%endif %}
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
 		{% component 'Timeline' %}
 	</div>
 </div>
