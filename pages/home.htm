@@ -61,7 +61,7 @@ $this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(fun
                     <div class="card horizontal mx-1 card-link card-new-item">
                         <div class="text-published">{{highlight.pretty_published_at}}</div>
                         {% if highlight.href %}
-                        <a href="{{highlight.href}}">
+                        <a href="/news/{{highlight.href}}">
                             {% endif %}
                             {% if highlight.cover %}
 
