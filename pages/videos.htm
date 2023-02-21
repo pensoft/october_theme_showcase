@@ -18,7 +18,6 @@ pageNumber = "{{ :page }}"
 <?php
 use Pensoft\Media\Models\Videos;
 use System\Models\File;
-use Redirect;
 
 function onStart(){
 	$this['mediaVideosList'] =  Videos::where('pensoft_media_videos.parent_id', null)->get();

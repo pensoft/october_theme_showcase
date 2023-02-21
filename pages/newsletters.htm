@@ -18,7 +18,7 @@ pageNumber = "{{ :page }}"
 <?php
 use Pensoft\Media\Models\Newsletters;
 use System\Models\File;
-use Redirect;
+
 
 function onStart(){
 	$this['mediaNewslettersList'] =  Newsletters::get();

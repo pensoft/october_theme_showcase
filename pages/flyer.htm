@@ -18,7 +18,6 @@ pageNumber = "{{ :page }}"
 <?php
 use Pensoft\Media\Models\Flyers;
 use System\Models\File;
-use Redirect;
 
 function onStart(){
 	$this['mediaFlyersList'] =  Flyers::where('name', 'not ILIKE', '%brochure%')->where('name', 'not ILIKE', '%poster%')->get();
@@ -69,7 +68,7 @@ function onStart(){
             </div>
             <div class="media-size text-center">SHOWCASE brochure</div>
             <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
-                Download 
+                Download
                 {% for brochure in brochures %}
 
             {# Use spaceless tag to remove spaces inside the A tag. #}

@@ -18,7 +18,6 @@ pageNumber = "{{ :page }}"
 <?php
 use Pensoft\Media\Models\Presentations;
 use System\Models\File;
-use Redirect;
 
 function onStart(){
 	$this['mediaPresentatoinsList'] =  Presentations::get();
