@@ -21,7 +21,7 @@ update_selector = "#gdpr-reload"
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% component 'SeoCmsPage' %} 
+    {% component 'SeoCmsPage' %}
     {% if this.theme.site_icon %}
     <link rel="icon" type="{{this.theme.site_icon.getContentType()}}" href="{{this.theme.site_icon.getPath()}}">
     {% endif %}
@@ -82,8 +82,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {% if this.theme.enable_footer %}
     <!-- Footer -->
     <footer id="layout-footer">
-        {% partial 'site/footer' 
-            enable_social_media=this.theme.social_media 
+        {% partial 'site/footer'
+            enable_social_media=this.theme.social_media
             enable_facebook=this.theme.facebook
             facebook_url=this.theme.facebook_url
 			enable_instagram=this.theme.instagram
@@ -103,11 +103,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {% endif %}
 
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    
-    
-	<div id="gdpr-reload">
-		{% partial 'gdpr' %}
-	</div>
+
+
+
 </body>
 {% component 'cookieBanner' %}
 
