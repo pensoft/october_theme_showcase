@@ -16,6 +16,7 @@ var keepFooter = function(documentHasScroll){
 
 
 $(document).ready(function() {
+	$('.navbar-nav').attr('id', 'menu'); // please don't remove this line
 	var loggedInMenuNavbar = $('.navbar-loggedin-user');
 	loggedInMenuNavbar.find('#menu').removeAttr('id');
 

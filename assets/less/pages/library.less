@@ -30,3 +30,90 @@
     });
   }
 }
+
+
+.container:has(.searchLibrary){
+    position: relative;
+    margin-top: 80px;
+
+    .row.center-xs.mb-1{
+        position: absolute;
+        top: -10px;
+        height: 90px;
+        left: 37%;
+    }
+}
+#searchLibrary{
+    position: absolute;
+    top: 86px;
+    right: 0;
+    form{
+        width: 386px;
+        height: 48px !important;
+        .breakpoint-large-down({
+            margin: 0 0 0 8px;
+            width: 95%!important;
+        });
+    }
+
+    input, select{
+        height: 47px;
+        color: @default-color!important;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        font-size: 18px;
+        color: #122642;
+        background-color: #ffffff;
+        border-radius: 0px 0px 0px 0px;
+        -moz-border-radius: 0px 0px 0px 0px;
+        -webkit-border-radius: 0px 0px 0px 0px;
+        border: 1px solid #d1d1d1;
+        border-right: none;
+        .rounded-tl(50px);
+        .rounded-bl(50px);
+    }
+
+    .search {
+        background: #ffffff;
+        position: unset!important;
+
+        width: 100%;
+        font-size: 18px;
+        color: #122642;
+        box-sizing: border-box;
+        padding: 0.7rem 1rem;
+        line-height: 1.3em;
+    }
+
+    .btn.searchLibrary {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-left: 0 !important;
+        line-height: unset !important;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border-bottom: 1px solid #d1d1d1;
+        border-top: 1px solid #d1d1d1;
+        border-right: 1px solid #d1d1d1;
+        padding: 0;
+        height: 47px;
+        width: 67px;
+        background-size: 26px;
+        &:before {
+            content: "\ea82";
+            display: flex;
+            font-family: "icomoon";
+            font-weight: 400;
+            font-size: 40px;
+        }
+    }
+
+    .breakpoint-large-down({
+        margin: 0 0 0 0;
+        width: 95%!important;
+        display: unset;
+    })
+}

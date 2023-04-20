@@ -1,9 +1,11 @@
-title = "Media center"
 url = "/media-center"
 layout = "default"
+title = "Media center"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
+
+[siteSearchInclude]
 ==
 <?php
 use Pensoft\Media\Models\MediaLogos;
@@ -23,6 +25,7 @@ function onStart(){
 }
 ?>
 ==
+{% component 'siteSearchInclude' %}
 <div class="container">
     <div class="row start-sm center-xs">
 		{% if logos.count() %}

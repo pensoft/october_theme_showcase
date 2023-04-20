@@ -1,6 +1,6 @@
-title = "Events"
 url = "/events/:slug?|[a-zA-Z\-0-9]"
 layout = "default"
+title = "Events"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -10,7 +10,7 @@ default = "true"
 limit = "null"
 category = "null"
 language = "en"
-
+redirect_to_detailed_page = "false"
 ==
 <?php
 use Pensoft\Calendar\Models\Entry;
@@ -52,12 +52,10 @@ function onStart(){
 <div class="container">
 {% if not slug %}
 	<div class="tabs">
-		<a class="" href="#calendarView">Calendar view</a>
 		<a class="" href="#listView">List view</a>
+		<a class="" href="#calendarView">Calendar view</a>
 	</div>
-	<div class="row" id="calendarView">
-		{% component 'calendar' %}
-	</div>
+	
 	<div class="row" id="listView">
 		<div class="events_list_container">
 			{% for entry in entries %}
@@ -98,6 +96,9 @@ function onStart(){
 			{% endfor %}
 		</div>
 
+	</div>
+	<div class="row" id="calendarView">
+		{% component 'calendar' %}
 	</div>
 
 {% else %}

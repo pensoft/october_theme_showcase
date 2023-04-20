@@ -1,6 +1,6 @@
-title = "Advisory board"
 url = "/advisory-board"
 layout = "default"
+title = "Advisory board"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -8,8 +8,10 @@ robot_follow = "follow"
 [profile_records]
 category = 1
 maxItems = 10
+
+[siteSearchInclude]
 ==
-<div class="container-fluid banner">
+{% component 'siteSearchInclude' %}<div class="container-fluid banner">
 	<div class="container advisory-board-container2">
 		{% component 'profile_records' %}
 	</div>
