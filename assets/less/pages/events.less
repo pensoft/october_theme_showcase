@@ -85,7 +85,7 @@
   width: 100%;
   display: block;
   //float: right;
-  text-align: right;
+  text-align: left;
   .btn-primary{
     .breakpoint-small-down({
       margin-bottom: 20px;
@@ -96,14 +96,15 @@
     text-align: center;
   });
   a{
-    margin-left: 20px;
+    margin-right: 20px;
     width: fit-content;
     font-weight: bold;
     cursor: pointer;
     font-family: Oswald;
     color: @green-color!important;
+    font-size: 1.5em;
     .breakpoint-small-down({
-      margin-left: 0px;
+      margin-right: 0px;
       width: 100%;
       text-align: center;
     });
@@ -122,7 +123,7 @@
   width: 100%;
 
   .event_list_item{
-    padding: 27px 35px;
+    padding: 27px 10px;
     border-bottom: 1px solid #d2d2d2;
     a {
       color: @text-color-default;
