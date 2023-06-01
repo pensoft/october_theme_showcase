@@ -117,3 +117,40 @@
         display: unset;
     })
 }
+
+.library{
+    .tabs{
+        margin-bottom: 40px;
+        width: 100%;
+        display: block;
+        text-align: left;
+        margin-top: 50px;
+        .btn-primary{
+            .breakpoint-small-down({
+                margin-bottom: 20px;
+            });
+        }
+        .breakpoint-small-down({
+            margin-bottom: 20px;
+            text-align: center;
+        });
+        a{
+            margin-right: 20px;
+            width: fit-content;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: Oswald;
+            color: @green-color!important;
+            .breakpoint-small-down({
+                margin-left: 0px;
+                width: 100%;
+                text-align: center;
+            });
+
+            &.active{
+                opacity: 0.6;
+            }
+        }
+
+    }
+}
