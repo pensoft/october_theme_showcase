@@ -1,4 +1,4 @@
-name: "Showcase"
+name: "SHOWCASE"
 author: "Pensoft"
 homepage: "https://pensoft.net"
 description: "Demonstrates the basic concepts of the front-end theming."
@@ -70,7 +70,7 @@ form:
                 default: My first project website
             author:
                 label: Author
-                default: 
+                default:
             site_icon:
                 label: Site icon
                 comment: Add new site icon, your theme recomends a icon size of 32x32
