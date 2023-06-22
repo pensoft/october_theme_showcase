@@ -1,6 +1,6 @@
-title = "Newsletters"
 url = "/media-center/newsletters"
 layout = "default"
+title = "Newsletters"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -68,11 +68,13 @@ return Redirect::to('/media-center/newsletters');
 			</div>
 			<div class="media-size text-center">{{record.name}}</div>
 			<div class="text-published" style="text-align: center;">{{record.date |date('F Y')}}</div>
-			{% if record.file %}
-			<div class="media-btn_broshure_and_poster text-center mt-1 mb-1"><a class="btn btn-secondary" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
+			{% if record.url %}
+					<div class="media-btn_broshure_and_poster text-center mt-1 mb-1"><a class="btn btn-secondary" href="{{ record.url}}" target="_blank">Read the newsletter</a></div>
+				{% else %}
+					<div class="media-btn_broshure_and_poster text-center mt-1 mb-1"><a class="btn btn-secondary" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
+				{% endif %}
 
-
-			{% endif %}
+			
 		</div>
 		{% endif %}
 

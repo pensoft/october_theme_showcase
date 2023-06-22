@@ -60,7 +60,7 @@ $(document).ready(function() {
 		$active = $($links.filter("[href=\'"+location.hash+"\']")[0] || $links[0]);
 
 		console.log($(this).parent().parent())
-        if($(this).parent().parent().hasClass('events')){
+        if($(this).parent().parent().hasClass('events') || $(this).parent().parent().hasClass('videos') ){
             $active.addClass('active');
         }
 
