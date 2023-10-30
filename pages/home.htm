@@ -1,8 +1,8 @@
-title = "SHOWCASing synergies between agriculture, biodiversity and Ecosystem services to help farmers capitalising on native biodiversity"
 url = "/"
 layout = "default"
-meta_description = "homepage desc"
+title = "SHOWCASing synergies between agriculture, biodiversity and Ecosystem services to help farmers capitalising on native biodiversity"
 is_hidden = 0
+meta_description = "SHOWCASing synergies between agriculture, biodiversity and Ecosystem services to help farmers capitalising on native biodiversity"
 seo_keywords = "keywords"
 robot_index = "index"
 robot_follow = "follow"
@@ -12,6 +12,8 @@ maxItems = 10
 title = "News and Events"
 baseUrl = "/news"
 templates = "template2"
+thumb_width = 250
+thumb_height = 250
 
 [publications_list]
 baseUrl = "/news"
@@ -21,14 +23,15 @@ templates = "template2"
 jumbotron = "homepage"
 title = 0
 background = "#ffffff"
+templates = "template1"
+description_limit = 0
 
 [Timeline]
 limit = 3
 upcoming = 1
+templates = "template1"
 ==
-
 <?php
-
 use Pensoft\Articles\Models\Article;
 
 function onStart(){
@@ -40,10 +43,8 @@ $this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(fun
 });
 
 }
-
 ?>
 ==
-
 <!-- latest from news -->
 {% component 'jumbotron' %}
 <div class="container-fluid banner bg-secondary">
