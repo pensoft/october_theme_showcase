@@ -1,6 +1,6 @@
-title = "News"
 url = "/news/:id?|[a-zA-Z\-0-9]"
 layout = "default"
+title = "News"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -8,6 +8,9 @@ robot_follow = "follow"
 [list]
 maxItems = 10
 templates = "template2"
+thumb_width = 250
+thumb_height = 250
+no_records_message = "No records found"
 ==
 <?php
 function urlencode($string){
@@ -68,7 +71,7 @@ function onStart()
             </div>
         </div>
         <script>
-            createTippy('#share-{{slug}}', {content: '<div class="icons">{% if this.theme.facebook %}<a class="fb-xfbml-parse-ignore pr p-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" ></a>{% endif %}{% if this.theme.twitter %}<a class="pr p-twitter" href="https://twitter.com/intent/tweet?text={{encoded_title}}{{page_url}}" target="_blank"></a>{% endif %}{% if this.theme.linkedin %}<a class="pr p-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank"></a>{% endif %}</div>'})
+            createTippy('#share-{{slug}}', {content: '<div class="icons">{% if this.theme.facebook %}<a class="fb-xfbml-parse-ignore pr p-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" ></a>{% endif %}{% if this.theme.twitter %}<a class="pr p-twitter" href="http://twitter.com/share?text={{article.title}}&url={{page_url}}" target="_blank"></a>{% endif %}{% if this.theme.linkedin %}<a class="pr p-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank"></a>{% endif %}</div>'})
         </script>
     {% else %}
         <div class="row">
