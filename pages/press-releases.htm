@@ -1,6 +1,6 @@
-title = "Press releases"
 url = "/media-center/press-releases"
 layout = "default"
+title = "Press releases"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -44,12 +44,9 @@ function onStart(){
 					<div class="text-published">{{record.date|date('j F Y')}}</div>
 					<div class="body">{{record.description | raw}}</div>
 					<div class="row link mt-1">
-						{% if record.link %}
-						<div class="col-xs-3"><a href="{{record.link}}" target="_blank">EurekAlert!</a></div>
-						{% endif %}
-						{% if record.link_cordis %}
-						<div class="col-xs-3"><a href="{{record.link_cordis}}" target="_blank">CORDIS Wire</a></div>
-						{% endif %}
+						{% for link in record.link %}
+                        <a href="{{link.url}}" target="_blank" class="btn btn-primary" style="margin-right: 10px;">{{link.text}}</a>
+                        {% endfor %}
 					</div>
 				</div>
 			</div>
