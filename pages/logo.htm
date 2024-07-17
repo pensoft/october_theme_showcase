@@ -1,6 +1,6 @@
-url = "/media-center/logo"
+url = "/media-center/brand-kit"
 layout = "default"
-title = "Logo"
+title = "Brand kit"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -78,6 +78,11 @@ return Redirect::to('/media-center/logo');
 				{% if record.file_eps %}
 				<div class="col-xs-12 col-lg-4 center-lg center-xs">
 					<div class="media-btn_broshure_and_poster"><a class="btn btn-secondary" href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.name|replace({' ': '_'})}}">Download .svg</a></div>
+				</div>
+				{% endif %}
+				{% if record.file_pdf %}
+				<div class="col-xs-12 col-lg-4 center-lg center-xs">
+					<div class="media-btn_broshure_and_poster"><a class="btn btn-secondary" href="{{record.file_pdf.path}}" target="_blank">Download .pdf</a></div>
 				</div>
 				{% endif %}
 			</div>

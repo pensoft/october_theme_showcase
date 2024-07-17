@@ -13,12 +13,37 @@ thumb_height = 250
 no_records_message = "No records found"
 ==
 <?php
+use Pensoft\Articles\Models\Article;
+use Pensoft\Articles\Models\Category;
+
 function urlencode($string){
     return trim(urlencode($string));
 }
+
+function onFilterArticles()
+{
+    $categoryId = input('categoryId');
+
+    if ($categoryId === 'all') {
+        $this['records'] = Article::news()->where('published_at', '<=', 'now()')
+            ->where('published', 'true')
+            ->orderBy('published_at', 'DESC')
+            ->paginate(15);
+    } else {
+            $this['records'] = Article::news()->whereHas('categories', function ($query) use ($categoryId) {
+            $query->where('id', $categoryId);
+        })->where('published_at', '<=', 'now()')
+            ->where('published', 'true')
+            ->orderBy('published_at', 'DESC')
+            ->paginate(15);
+    }
+}
+
 function onStart()
 {
-    $this['records'] = Pensoft\Articles\Models\Article::news()->where('published_at', '<=', 'now()')->orderBy('published_at', 'DESC')->paginate(15, ['*'], 'p');
+    $this['records'] = Article::news()->where('published_at', '<=', 'now()')->where('published', 'true')->orderBy('published_at', 'DESC')->paginate(15, ['*'], 'p');
+    $this['categories'] = Category::orderBy('sort_order')->get();
+
     $this['article'] = Pensoft\Articles\Models\Article::where('slug', $this->param('id'))->first();
     if($this['article']){
 
@@ -28,7 +53,7 @@ function onStart()
             $seoTitle = $this['article']['title'];
             $seoKeywords = $this['article']['meta_keywords'] ?: $this['article']['keywords'];
             $seoDescription = str_limit(Html::strip($this['article']['content']), 255);
-    
+
             if (class_exists('\BennoThommo\Meta\Meta')) {
                 if($seoTitle) {
                     \BennoThommo\Meta\Meta::set('title', $seoTitle);
@@ -91,8 +116,30 @@ function onStart()
             createTippy('#share-{{slug}}', {content: '<div class="icons">{% if this.theme.facebook %}<a class="fb-xfbml-parse-ignore pr p-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{page_url}}&amp;src=sdkpreparse" target="_blank" ></a>{% endif %}{% if this.theme.twitter %}<a class="pr p-twitter" href="http://twitter.com/share?text={{article.title}}&url={{page_url}}" target="_blank"></a>{% endif %}{% if this.theme.linkedin %}<a class="pr p-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{page_url}}" target="_blank"></a>{% endif %}</div>'})
         </script>
     {% else %}
+        <div class="container category-tabs-container">
+            {% if categories.count > 0 %}
+            <div class="row between-xs category-tabs">
+                <a href="javascript:;"
+                   class="active"
+                   data-request="onFilterArticles"
+                   data-request-data="categoryId: 'all'"
+                   data-request-update="'components/newslist-records': '#newslist-records'">
+                    All News
+                </a>
+                {% for category in categories %}
+                <a href="javascript:;"
+                   data-request="onFilterArticles"
+                   data-request-data="categoryId: {{ category.id }}"
+                   data-request-update="'components/newslist-records': '#newslist-records'">
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+        </div>
         <div class="row">
-            <div class="col-xs">
+            <div class="col-xs" id="newslist-records">
                 <div class="newslist row">
                     {% for record in records %}
                     <div class="col-xs-12 col-md-6 news-item item-{{record.slug}}">
