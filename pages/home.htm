@@ -101,20 +101,9 @@ $this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(fun
 	<div class="container">
 		<div class="row d-flex justify-content-evenly">
 			<div class="col-sm-5 col-xs-12">
-				{% if this.theme.facebook %}
-				<div class="fb-page" 
-					data-href="{{this.theme.facebook_url}}" 
-					data-tabs="timeline" 
-					data-width="500" 
-					data-height="300" 
-					data-small-header="false" 
-					data-adapt-container-width="true" 
-					data-hide-cover="false" 
-					data-show-facepile="false">
-					<blockquote cite="{{this.theme.facebook_url}}" class="fb-xfbml-parse-ignore">
-						<a href="{{this.theme.facebook_url}}">{{this.theme.name}}</a>
-					</blockquote>
-				</div>
+				{% if this.theme.twitter %}
+				<a class="twitter-timeline" data-width="500" data-height="300" href="https://twitter.com/SHOWCASE_H2020?ref_src=twsrc%5Etfw">Tweets by SHOWCASE_H2020</a> 
+				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 				{% endif %}
 			</div>
 			<div class="col-sm-4 col-xs-12">
