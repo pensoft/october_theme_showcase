@@ -20,29 +20,38 @@ function urlencode($string){
     return trim(urlencode($string));
 }
 
-function onFilterArticles()
-{
-    $categoryId = input('categoryId');
-
-    if ($categoryId === 'all') {
-        $this['records'] = Article::news()->where('published_at', '<=', 'now()')
-            ->where('published', 'true')
-            ->orderBy('published_at', 'DESC')
-            ->paginate(15);
-    } else {
-            $this['records'] = Article::news()->whereHas('categories', function ($query) use ($categoryId) {
-            $query->where('id', $categoryId);
-        })->where('published_at', '<=', 'now()')
-            ->where('published', 'true')
-            ->orderBy('published_at', 'DESC')
-            ->paginate(15);
-    }
-}
 
 function onStart()
 {
-    $this['records'] = Article::news()->where('published_at', '<=', 'now()')->where('published', 'true')->orderBy('published_at', 'DESC')->paginate(15, ['*'], 'p');
-    $this['categories'] = Category::orderBy('sort_order')->get();
+    $this['categories'] = Category::orderBy('sort_order')->orderBy('created_at', 'desc')->get();
+
+    $categoryId = input('categoryId', 'all');
+
+    if ($categoryId !== 'all' && !is_numeric($categoryId)) {
+    return redirect('news');
+    }
+
+    $this['categoryId'] = $categoryId;
+
+    if ($categoryId === 'all') {
+    $records = Article::news()->where('published_at', '<=', 'now')
+    ->where('published', 'true')
+    ->orderBy('published_at', 'DESC')
+    ->paginate(12);
+    } else {
+    $records = Article::news()->whereHas('categories', function ($query) use ($categoryId) {
+    $query->where('id', $categoryId);
+    })->where('published_at', '<=', 'now')
+    ->where('published', 'true')
+    ->orderBy('published_at', 'DESC')
+    ->paginate(12);
+    }
+
+    if ($categoryId !== 'all') {
+    $records->appends(['categoryId' => $categoryId]);
+    }
+
+    $this['records'] = $records;
 
     $this['article'] = Pensoft\Articles\Models\Article::where('slug', $this->param('id'))->first();
     if($this['article']){
@@ -118,58 +127,20 @@ function onStart()
     {% else %}
         <div class="container category-tabs-container">
             {% if categories.count > 0 %}
-            <div class="row between-xs category-tabs">
-                <a href="javascript:;"
-                   class="active"
-                   data-request="onFilterArticles"
-                   data-request-data="categoryId: 'all'"
-                   data-request-update="'components/newslist-records': '#newslist-records'">
-                    All News
-                </a>
+            <div class="row category-tabs" id="category-tabs">
+                <a href="{{ 'news'|page }}" class="{{ 'all' == categoryId ? 'active' : '' }}">All News</a>
                 {% for category in categories %}
-                <a href="javascript:;"
-                   data-request="onFilterArticles"
-                   data-request-data="categoryId: {{ category.id }}"
-                   data-request-update="'components/newslist-records': '#newslist-records'">
-                    {{ category.name }}
-                </a>
+                <a href="{{ 'news'|page }}?categoryId={{ category.id }}" class="{{ category.id == categoryId ? 'active' : '' }}">{{ category.name }}</a>
                 {% endfor %}
             </div>
 
             {% endif %}
         </div>
-    <div id="newslist-records">
+
         <div class="row">
             <div class="col-xs">
-                <div class="newslist row">
-                    {% for record in records %}
-                    <div class="col-xs-12 col-md-6 news-item item-{{record.slug}}">
-                        <div class="row news_column">
-                            {% if record.cover %}
-                            <a class="news-image col-xs-12 center-xs" href="{{'news'|page}}/{{record.slug}}">
-
-                                <img class="news-img-top" src="{{record.cover.getThumb(250, 250, {'mode': 'crop'})}}">
-
-                            </a>
-                            {% endif %}
-                            <div class="news-container col-xs-12">
-                                <div class="news-title">
-                                    <h3 class="card-title"><a href="{{'news'|page}}/{{record.slug}}">{{record.title|raw}}</a></h3>
-                                </div>
-                                <div class="text-published">{{record.published_at|date('d F Y')}}</div>
-                                <div class="body">
-                                    {% if record.content|striptags|raw|length > 350 %}
-                                        {{ record.content|striptags|truncate(350, true, "...")|raw }}
-                                    {% else %}
-                                        {{ record.content|striptags|raw }}
-                                    {% endif %}
-                                    </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {% endfor %}
+                <div class="newslist row"  id="newslist-records">
+                    {% partial 'components/newslist-records' %}
                 </div>
             </div>
         </div>
@@ -178,4 +149,3 @@ function onStart()
         </div>
     </div>
     {% endif %}
-</div>

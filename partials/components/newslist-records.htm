@@ -1,7 +1,4 @@
-<div id="newslist-records">
-    <div class="row">
-        <div class="col-xs">
-            <div class="newslist row">
+
     {% for record in records %}
     <div class="col-xs-12 col-md-6 news-item item-{{record.slug}}">
         <div class="row news_column">
@@ -30,10 +27,3 @@
     </div>
 
     {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="row container">
-        {{ records.render|raw }}
-    </div>
-</div>
