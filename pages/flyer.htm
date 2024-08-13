@@ -1,6 +1,6 @@
-title = "Promotional materials"
 url = "/media-center/flyer"
 layout = "default"
+title = "Promotional materials"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -80,7 +80,7 @@ function onStart(){
             {% endspaceless %}
             {% endfor%}
             </div>
-            <div class="media-size text-center">{{brochureEN.file.extension | uppercase}} {{brochureEN.file.size }}</div>
+            <div class="media-size text-center">&nbsp;</div>
 
         </div>
 
@@ -102,7 +102,7 @@ function onStart(){
                 {% endspaceless %}
                 {% endfor%}
             </div>
-            <div class="media-size text-center">{{posterEN.file.extension | uppercase}} {{posterEN.file.size }}</div>
+            <div class="media-size text-center">&nbsp;</div>
 
         </div>
 
@@ -122,7 +122,7 @@ function onStart(){
                 <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
                     <a class="btn btn-secondary" style="padding: 5px 18px;" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
 
-                <div class="media-size text-center">{{record.file.extension | uppercase}} {{record.file.size }}</div>
+                <div class="media-size text-center">&nbsp;</div>
                 {% endif %}
             </div>
             {% endif %}

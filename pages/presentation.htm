@@ -1,6 +1,6 @@
-title = "Policy briefs"
 url = "/media-center/policy-briefs"
 layout = "default"
+title = "Policy briefs"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -69,7 +69,7 @@ return Redirect::to('/media-center/policy-briefs');
             <div class="media-btn_broshure_and_poster text-center mt-1 mb-1">
                 <a class="btn btn-secondary" style="padding: 5px 18px;" href="{{ record.file.path }}#{{record.file.file_name}}" target="_blank">Download</a></div>
 
-            <div class="media-size text-center">{{record.file.extension | uppercase}} {{record.file.size }}</div>
+            <div class="media-size text-center">&nbsp;</div>
             {% endif %}
         </div>
         {% endspaceless %}

@@ -55,41 +55,39 @@ return Redirect::to('/media-center/logo');
 	{% set detailsPage = mediaLogosList.detailsPage %}
 	{% set detailsKeyColumn = mediaLogosList.detailsKeyColumn %}
 	{% set detailsUrlParameter = mediaLogosList.detailsUrlParameter %}
-
+<div class="row">
 	{% for record in records %}
 	{# Use spaceless tag to remove spaces inside the A tag. #}
 	{% spaceless %}
+	
 		{% if record.logo_image %}
-			<div class="row">
-				<div class="col-xs-12">
-						<p style="text-align: center;"><img src="{{record.logo_image.path}}" title="{{record.name}}" style="max-width: 350px;"></p>
-				</div>
+		
+			<div class="col-md-4 col-xs-12 center-xs mb-4">
+				<p style="text-align: center;"><img src="{{record.logo_image.path}}" title="{{record.name}}" class="brand-kit-image"></p>
+	            
+	                    <b>Download {{record.name}}</b> <br><br>
+	                    {% if record.file_jpg %}
+	                        <a href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.file_jpg.file_name|replace({' ': '_'})}}" title="Brand kit" class="btn btn-secondary" style="padding: 5px 16px;"><i class="pr p-download"></i>  JPG</a> &nbsp;
+	                    {% endif %}
+	                    {% if record.file_png %}
+	                        <a href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.file_png.file_name|replace({' ': '_'})}}" title="Brand kit" class="btn btn-secondary" style="padding: 5px 16px;"><i class="pr p-download"></i>  PNG</a> &nbsp;
+	                    {% endif %}
+	                    {% if record.file_eps %}
+	                        <a href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.file_eps.file_name|replace({' ': '_'})}}" title="Brand kit" class="btn btn-secondary" style="padding: 5px 16px;"><i class="pr p-download"></i>  SVG</a> &nbsp;
+	                    {% endif %}
+	                    {% if record.file_pdf %}
+	                        <a href="{{record.file_pdf.path}}" target="_blank" title="Brand kit" class="btn btn-secondary" style="padding: 5px 16px;"><i class="pr p-download"></i>  PDF</a> &nbsp;
+	                    {% endif %}
+	            
+	        </div>
+		
 
-				{% if record.file_jpg %}
-					<div class="col-xs-12 col-lg-4 center-lg center-xs">
-						<div class="media-btn_broshure_and_poster"><a class="btn btn-secondary" href="{{ ''| page }}?{{queries}}&download={{record.file_jpg.id}}&file_name={{record.name|replace({' ': '_'})}}">Download .jpg</a></div>
-					</div>
-				{% endif %}
-				{% if record.file_png %}
-				<div class="col-xs-12 col-lg-4 center-lg center-xs">
-					<div class="media-btn_broshure_and_poster"><a class="btn btn-secondary" href="{{ ''| page }}?{{queries}}&download={{record.file_png.id}}&file_name={{record.name|replace({' ': '_'})}}">Download .png</a></div>
-				</div>
-				{% endif %}
-				{% if record.file_eps %}
-				<div class="col-xs-12 col-lg-4 center-lg center-xs">
-					<div class="media-btn_broshure_and_poster"><a class="btn btn-secondary" href="{{ ''| page }}?{{queries}}&download={{record.file_eps.id}}&file_name={{record.name|replace({' ': '_'})}}">Download .svg</a></div>
-				</div>
-				{% endif %}
-				{% if record.file_pdf %}
-				<div class="col-xs-12 col-lg-4 center-lg center-xs">
-					<div class="media-btn_broshure_and_poster"><a class="btn btn-secondary" href="{{record.file_pdf.path}}" target="_blank">Download .pdf</a></div>
-				</div>
-				{% endif %}
-			</div>
+			
 		{% endif %}
 
 	{% endspaceless %}
 	{% else %}
 	{{ noRecordsMessage }}
 	{% endfor %}
+	</div>
 </div>

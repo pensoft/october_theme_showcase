@@ -14,6 +14,7 @@ baseUrl = "/news"
 templates = "template2"
 thumb_width = 250
 thumb_height = 250
+title_max_length = 150
 
 [publications_list]
 baseUrl = "/news"
@@ -36,11 +37,17 @@ use Pensoft\Articles\Models\Article;
 
 function onStart(){
 
-$this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(function($item){
-                        $item->content = str_limit(strip_tags($item->content), 100);
-                        $item->href = $item->slug;
-                        return $item;
-});
+
+    $this['highlights'] = Article::news()->descPublished()->whereHas('categories', function($q) {
+                                    $q->where('name', 'Publications');
+                                })->get();
+
+//$this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(function($item){
+//                        $item->content = str_limit(strip_tags($item->content), 100);
+//                        $item->href = $item->slug;
+//                        return $item;
+//
+//});
 
 }
 ?>
@@ -55,7 +62,7 @@ $this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(fun
                 <h1 class="base_heading">{{title}}</h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row around-xs">
             <div class="col-xs-12">
                 <div id="card-carousel" class="card-carousel">
                     {% for highlight in highlights %}
@@ -84,6 +91,7 @@ $this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(fun
                     {% endfor %}
                 </div>
             </div>
+			<div class="col-md-4 col-xs-12 center-xs"><a href="/news" class="btn btn-primary fluid">Check out all the news items</a></div>
         </div>
     </div>
 
