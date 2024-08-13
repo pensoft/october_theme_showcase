@@ -14,6 +14,7 @@ use Pensoft\Media\Models\Newsletters;
 use Pensoft\Media\Models\Presentations;
 use Pensoft\Media\Models\Pressreleases;
 use Pensoft\Media\Models\Videos;
+use Pensoft\Media\Models\Documents;
 
 function onStart(){
 	$this['logos'] =  MediaLogos::get();
@@ -22,6 +23,7 @@ function onStart(){
 	$this['presentations'] =  Presentations::get();
 	$this['pressreleases'] =  Pressreleases::get();
 	$this['videos'] =  Videos::get();
+	$this['documents'] =  Documents::get();
 }
 ?>
 ==
@@ -85,6 +87,16 @@ function onStart(){
 				<a href="{{url('media-center')}}/videos" title="Videos">
 					<span class="card_image_container" style="background: url({{'pensoft/Videos.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/videos" title="Videos"></span>
 					<span class="btn btn-secondary width100">Videos</span>
+				</a>
+			</div>
+		</div>
+		{% endif %}
+		{% if documents.count() %}
+		<div class="col-sm-3 col-xs-10 mt-md-0 mt-1">
+			<div class="card-container">
+				<a href="{{url('media-center')}}/awareness-raising-materials" title="Awareness-raising materials">
+					<span class="card_image_container" style="background: url({{'pensoft/Presentations.svg'|media}}) center center no-repeat;" href="{{url('media-center')}}/awareness-raising-materials" title="Awareness-raising materials"></span>
+					<span class="btn btn-secondary width100">Awareness-raising materials</span>
 				</a>
 			</div>
 		</div>
