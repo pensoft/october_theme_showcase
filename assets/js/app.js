@@ -54,7 +54,7 @@ $(document).ready(function() {
         $(this).addClass('active');
     });
 
-	$('.tabs').each(function(){
+	$('.tabs:not(#mylibraryForm)').each(function(){
 		// For each set of tabs, we want to keep track of
 		// which tab is active and its associated content
 		var $active, $content, $links = $(this).find('a');
@@ -64,7 +64,6 @@ $(document).ready(function() {
 		// If no match is found, use the first link as the initial active tab.
 		$active = $($links.filter("[href=\'"+location.hash+"\']")[0] || $links[0]);
 
-		console.log($(this).parent().parent())
         if($(this).parent().parent().hasClass('events') || $(this).parent().parent().hasClass('videos') ){
             $active.addClass('active');
         }

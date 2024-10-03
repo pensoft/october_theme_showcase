@@ -65,7 +65,7 @@ return Redirect::to('/media-center/videos');
         <div class="col-xs-12 col-md-6" id="accordion-documents">
             <p>{{record.name}}</p>
             {% if record.file %}
-            <video controls="" height="360px" width="570px"><source src="{{record.file.path}}" type="video/mp4"></video>
+            <video controls="" height="360px" width="90%"><source src="{{record.file.path}}" type="video/mp4"></video>
 
             <p>Attachment: {{record.file.file_name}}</p>
 
@@ -75,7 +75,7 @@ return Redirect::to('/media-center/videos');
             {% endif %}
 
             {% if record.youtube_url %}
-            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="570" height="360"></iframe>
+            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="90%" height="360"></iframe>
 
             <p>&nbsp;</p>
             {% endif %}
@@ -109,7 +109,7 @@ return Redirect::to('/media-center/videos');
                     {% endif %}
 
                     {% if subvideo.youtube_url %}
-                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="570" height="360"></iframe>
+                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="90%" height="360"></iframe>
 
                     <p>&nbsp;</p>
                     {% endif %}
@@ -154,7 +154,7 @@ return Redirect::to('/media-center/videos');
             {% endif %}
 
             {% if record.youtube_url %}
-            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="570" height="360"></iframe>
+            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="90%" height="360"></iframe>
 
             <p>&nbsp;</p>
             {% endif %}
@@ -188,7 +188,7 @@ return Redirect::to('/media-center/videos');
                     {% endif %}
 
                     {% if subvideo.youtube_url %}
-                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="570" height="360"></iframe>
+                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="90%" height="360"></iframe>
 
                     <p>&nbsp;</p>
                     {% endif %}
@@ -231,7 +231,7 @@ return Redirect::to('/media-center/videos');
             {% endif %}
 
             {% if record.youtube_url %}
-            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="570" height="360"></iframe>
+            <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{record.youtube_url}}" width="90%" height="360"></iframe>
 
             <p>&nbsp;</p>
             {% endif %}
@@ -265,7 +265,7 @@ return Redirect::to('/media-center/videos');
                     {% endif %}
 
                     {% if subvideo.youtube_url %}
-                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="570" height="360"></iframe>
+                    <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" src="{{subvideo.youtube_url}}" width="90%" height="360"></iframe>
 
                     <p>&nbsp;</p>
                     {% endif %}
