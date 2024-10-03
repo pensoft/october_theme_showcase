@@ -17,13 +17,45 @@ pageNumber = "{{ :page }}"
 ==
 <?php
 use Pensoft\Media\Models\Pressreleases;
+use Pensoft\Media\Models\PressCategory;
 
 function onStart(){
 	$this['mediaPressreleasesList'] =  Pressreleases::orderBy('date', 'desc')->get();
+    $this['categories'] = PressCategory::get();
+
+    $categoryId = input('categoryId', 'all');
+
+    if ($categoryId !== 'all' && !is_numeric($categoryId)) {
+        return redirect('media-center/press-releases');
+    }
+
+    $this['categoryId'] = $categoryId;
+
+    if ($categoryId === 'all') {
+        $records = Pressreleases::orderBy('date', 'desc')->get();
+    } else {
+        $records = Pressreleases::where('category_id', $categoryId)->get();
+    }
+
+
+    $this['mediaPressreleasesList'] = $records;
+
 }
 ?>
 ==
 <div class="container">
+    {% if categories.count() > 0 %}
+    <div class="tabs" id="category-tabs">
+        <a href="{{ 'media-center/press-releases'|page }}?categoryId=all" class="{{ 'all' == categoryId ? 'active' : '' }}">All Press Releases</a>
+        {% for category in categories %}
+        <a href="{{ 'media-center/press-releases'|page }}?categoryId={{ category.id }}" class="{{ category.id == categoryId ? 'active' : '' }}">
+            {{ category.title }}
+        </a>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
 	<div class="row between-md">
 		{% set records = mediaPressreleasesList %}
 		{% set displayColumn = mediaPressreleasesList.displayColumn %}
