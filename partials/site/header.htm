@@ -38,32 +38,24 @@ numberOfLevels = 2
 		<span></span>
 		{% component 'menu' %}
 	</div>
+	
 	<a href="{{'home'|page}}" class="navbar-brand" style="background-image: url('{{ this.theme.site_logo.getPath() }}'); background-position: center; background-size: contain;">
 
     </a>
 
-        <div class="navbar-collapse collapse " id="headerNavbarNav" style="display: none;">
-			{% component 'menu' %}
-			<div id="headerNavbarLogin">
-				<ul class="navbar-nav" style="padding: 0; margin: 0;">
-
-				</ul>
-			</div>
+	<div class="navbar-collapse collapse " id="headerNavbarNav" style="display: none;">
+		{% component 'menu' %}
+		<div id="search" class="search" style="display: none;">
+			<form class="input-group" action="{{ 'search' | page }}" method="get">
+				<input class="form-control search_input" style="color: #000;" name="q" type="text" autocomplete="on" placeholder="Search">
+				<button class="btn btn-link pr p-search big text-grey-search-btn" type="submit"></button>
+				<div class="close-search" onclick="hideSearchForm();">&#10006;</div>
+			</form>
 		</div>
-            <div id="search" class="search" >
-                <form class="input-group align-items-start" action="{{ 'search' | page }}" method="get">
-                    <input class="form-control search" name="q" type="text" autocomplete="on">
-                    <button class="btn search btn-link pr p-search big text-grey-search-btn" type="submit"></button>
-                </form>
-            </div>
-
-
-
+	</div>
 </nav>
 
-
-
-{% if this.theme.header_image %}
+{% if this.theme.header_image and page_id != 'home' %}
 <div class="header-image {{page_id}}">
     {%if this.page.header_image %}
         <div class="header-image-bar" style="background-image: url('{{this.page.header_image|media}}'); background-position: bottom center;"></div>
