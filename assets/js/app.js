@@ -187,119 +187,9 @@ $(document).ready(function() {
     //     }
     // });
 
-    /*
-     * HOMEPAGE intro carousel
-    **/
-    /* HOMEPAGE intro **/
-    $('.video-carousel').slick({
-        autoplaySpeed: 5000,
-        draggable: true,
-        pauseOnHover: true,
-        infinite: true,
-        speed: 1000,
-        autoplay: true,
-        arrows: false,
-        fade: true,
-        lazyLoad: 'ondemand',
-        dots: true,
-    });
 
-    /* News highlights carousel **/
-	$('.results-carousel').slick({
-		autoplay: false,
-		draggable: true,
-		centerMode: false,
-		variableWidth: false,
-		infinite: true,
-		slidesToShow: 3.6,
-		speed: 1000,
-		centerPadding: '8%',
-		slidesToScroll: 1,
-		arrows: true,
-		dots: false,
-		responsive: [
-			{
-				breakpoint: 1606,
-				settings: {
-					slidesToShow: 2.8,
-				}
-			},
-			{
-				breakpoint: 768,
-				settings: {
-					arrows: false,
-					dots: true,
-					centerMode: false,
-					// centerPadding: '2%',
-					slidesToShow: 1
-				}
-			},
-		]
-	});
 
-    // Custom navigation button events
-    $('.trigger_prev').on('click', function() {
-        $('.results-carousel').slick('slickPrev');  // Move to the previous slide
-    });
 
-    $('.trigger_next').on('click', function() {
-        $('.results-carousel').slick('slickNext');  // Move to the next slide
-    });
-
-    // bootstrap 3 responsive multi column slick carousel
-    $('#slick').slick({
-        autoplay: true,
-        autoplaySpeed: 2000,
-        draggable: true,
-        pauseOnHover: true,
-        infinite: true,
-        dots: true,
-        arrows: true,
-        speed: 1000,
-
-        mobileFirst: true,
-
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        autoSlidesToShow: true,
-        variableWidth: true,
-        // prevArrow: true,
-        // nextArrow: true,
-
-        responsive: [
-            {
-                breakpoint: breakpoint.xs,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: breakpoint.sm,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    arrows: true
-                }
-            },
-            {
-                breakpoint: breakpoint.md,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    arrows: true
-                }
-            },
-            {
-                breakpoint: breakpoint.lg,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                    arrows: true
-                }
-            }
-        ]
-    });
 });
 
 
@@ -310,58 +200,32 @@ function encodeURIObject(data){
     }).join('&');
 }
 
-function appendProfile() { 
+function appendProfile() {
     $(document).on('profile', function (e) {
-        var navbarNav = $('.navbar-nav');
-        var li = '<li class="nav-item"><a class="btn btn-primary" href="/profile" target = "_self">Profile</a></li>';
-        var li_2 = '<li class="nav-item"><a class="search-icon" onclick="showSearchForm();"></a></li>';
-
-        navbarNav.append(li_2, li);
+        var headerNavbarNav = $('#headerNavbarNav');
+        var li = '<li class="nav-item"><a href="/profile" target = "_self">Profile</a></li >';
+        headerNavbarNav.find('>ul').append(li);
     });
 }
-
-$('#menu .search-icon').parent().css({
-    'display': 'flex',
-    'justify-content': 'flex-end'
-});
-
-
 function appendSignIn(){
     $(document).on('signin', function (e) {
-        var navbarNav = $('.navbar-nav');
-        var li = '<li class="nav-item sign-in"><a class="btn btn-primary" href="/login" target = "_self">Log in</a></li>';
-        var li_2 = '<li class="nav-item"><a class="search-icon" onclick="showSearchForm();"></a></li>';
-
-        navbarNav.append(li_2, li);
+        var headerNavbarLogin = $('#headerNavbarLogin');
+        var li = '<li class="nav-item sign-in"><a href="/login" target = "_self">Login</a></li >';
+		headerNavbarLogin.find('>ul').append(li);
+		var menu = $('#menuToggle');
+		menu.find('>ul').append(li);
     });
 }
 
 function appendSignOut() {
     $(document).on('signout', function (e) {
-        var navbarNav = $('.navbar-nav');
-        var li = '<li class="nav-item sign-in"><a class="btn btn-primary" data-request="onLogout" data-request-data="redirect: \'/\'">Logout</a></li>';
-        var li_2 = '<li class="nav-item"><a class="search-icon" onclick="showSearchForm();"></a></li>';
-
-        navbarNav.append(li_2, li);
+        var headerNavbarNav = $('#headerNavbarLogin');
+        var li = '<li class="nav-item  sign-in"><a data-request="onLogout" data-request-data="redirect: \'/\'">Logout</a></li >';
+        headerNavbarNav.find('>ul').append(li);
+		var menu = $('#menuToggle');
+		menu.find('>ul').append(li);
     });
 }
-
-// Function to show the search form
-function showSearchForm() {
-	$('#layout-header').toggleClass('full-width');
-	$('#search').show(); // Show the search form
-	$('.navbar a.p-search').css('visibility', 'hidden'); // Hide other search elements if needed
-	$('#menu li').hide(); // Hide menu items
-}
-
-// Function to hide the search form
-function hideSearchForm() {
-	$('#layout-header').toggleClass('full-width');
-	$('#search').hide(); // Hide the search form
-	$('.navbar a.p-search').css('visibility', 'visible'); // Restore search element visibility
-	$('#menu li').show(); // Show menu items again
-}
-
 
 function initAccordeon(pElem) {
 	$('body').on('click', '.accordion-toggle', function () {

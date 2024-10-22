@@ -37,108 +37,120 @@ use Pensoft\Articles\Models\Article;
 
 function onStart(){
 
-	$this['highlights'] = Article::news()->where('published', 'true')->descPublished()->take(3)->get();
 
-	$this['results'] = Article::news()->descPublished()->whereHas('categories', function($q) {
-		$q->where('name', 'Results');
-	})->take(8)->get();
+    $this['highlights'] = Article::news()->descPublished()->whereHas('categories', function($q) {
+                                    $q->where('name', 'Publications');
+                                })->get();
+
+//$this['highlights'] = Article::news()->descPublished()->take(10)->get()->map(function($item){
+//                        $item->content = str_limit(strip_tags($item->content), 100);
+//                        $item->href = $item->slug;
+//                        return $item;
+//
+//});
 
 }
 ?>
 ==
-
+<!-- latest from news -->
 {% component 'jumbotron' %}
+<div class="container-fluid banner bg-secondary">
 
-<!-- Results -->
-{% if results.count() %}
-<div class="container-fluid bg-secondary">
-	<div class="home-results">
-		<div class="container pb-2">
-			<div class="row justify-content-between">
-				<h2 class="base_heading">Results</h2>
-				<div class="row arrow-row">
-					<div class="trigger_prev"></div>
-					<div class="trigger_next"></div>
-				</div>
-			</div>
-		</div>
-		<div class="results-carousel">
-			{% for result in results %}
-			<div class="results-item">
-				<div class="results-card">
-					<div class="results-card-image">
-						<a href="/news/{{result.slug}}">
-							<img src="{{ result.cover.path }}" alt="{{ result.title }}">
-						</a>
-					</div>
-					<div class="results-card-content">
-						<div class="results-label">Label</div>
-						<p class="results-date">{{ result.published_at|date("d M Y") }}</p>
-						<a href="/news/{{result.slug}}">
-							<p class="results-title">
-								{{ result.title|slice(0, 69) }}{% if result.title|length > 69 %}...{% endif %}
-							</p>
-							<p class="results-text">
-								{% if result.content|striptags|raw|length > 96 %}
-								{{ result.content|striptags|truncate(96, true, "...")|raw }}
-								{% else %}
-								{{ result.content|striptags|raw }}
-								{% endif %}
-							</p>
-						</a>
-						<a class="btn btn-primary view_all" href="/news/{{result.slug}}">Learn more<i></i></a>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-		</div>
+    <div class="container highlights-news">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="base_heading">{{title}}</h1>
+            </div>
+        </div>
+        <div class="row around-xs">
+            <div class="col-xs-12">
+                <div id="card-carousel" class="card-carousel">
+                    {% for highlight in highlights %}
+                    <div class="card horizontal mx-1 card-link card-new-item">
+                        <div class="text-published">{{highlight.pretty_published_at}}</div>
+                        {% if highlight.href %}
+                        <a href="/news/{{highlight.href}}">
+                            {% endif %}
+                            {% if highlight.cover %}
+
+                            <img class="card-img-top" src="{{ highlight.cover.thumb(250, 250, {'mode': 'crop'}) }}">
+                            {% endif %}
+                            {% if highlight.content or highlight.title %}
+                            <div class="card-body">
+                                {% if highlight.title %}
+                                <h3 class="card-title">{{highlight.title|raw}}</h3>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+
+                            {% if highlight.href %}
+                        </a>
+                        {%endif %}
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+			<div class="col-md-4 col-xs-12 center-xs"><a href="/news" class="btn btn-primary fluid">Check out all the news items</a></div>
+        </div>
+    </div>
+
+
+    <div class="container">
+		{% component 'Timeline' %}
 	</div>
 </div>
-{% endif %}
-
-<!-- Latest news -->
-{% if highlights.count() %}
-<div class="container-fluid home-news">
+<div class="container">
+	<div class="row">
+		<div class="col-xs">
+			{% component 'publications_list' %}
+		</div>
+	</div>
 	<div class="container">
-		<h2 class="base_heading">Latest news</h2>
-		<div class="row newslist">
-			{% for highlight in highlights %}
-			<div class="col-md-4 col-xs-12 news-item">
-				<div class="news-card">
-					<div class="news-card-image">
-						<a href="/news/{{highlight.slug}}">
-							<img src="{{ highlight.cover.path }}" alt="{{ highlight.title }}">
-						</a>
+		<div class="row d-flex justify-content-evenly">
+			<div class="col-sm-5 col-xs-12">
+				{% if this.theme.twitter %}
+				<a class="twitter-timeline" data-width="500" data-height="300" href="https://twitter.com/SHOWCASE_H2020?ref_src=twsrc%5Etfw">Tweets by SHOWCASE_H2020</a> 
+				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				{% endif %}
+			</div>
+			<div class="col-sm-4 col-xs-12">
+	
+				<div class="subscribe-container">
+					<div class="subscribe-items d-flex justify-content-evenly flex-column">
+						<a href="/calendar" class="btn btn-primary fluid">Calendar</a>
+	
+						{%if this.theme.subscribe%}
+						<a href="{{this.theme.subscribe}}" target="_blank" class="btn btn-primary fluid">Subscribe</a>
+						{%endif%}
+	
+						{%if this.theme.feedback%}
+						<a href="mailto:{{this.theme.feedback}}" class="btn btn-primary fluid">Feedback</a>
+						{%endif%}
 					</div>
-					<div class="news-card-content">
-						<p class="news-date">{{ highlight.published_at|date("d M Y") }}</p>
-						<a href="/news/{{highlight.slug}}">
-							<p class="news-title">
-								{{ highlight.title|slice(0, 155) }}{% if highlight.title|length > 155 %}...{% endif %}
-							</p>
-						</a>
+					<div class="subscribe-items text-center d-flex justify-content-evenly">
+						{% if this.theme.twitter %}
+						<a href="{{this.theme.twitter_url}}" target="_blank" class="btn p-primary pr p-twitter big"></a>
+						{% endif %}
+						{% if this.theme.facebook %}
+						<a href="{{this.theme.facebook_url}}" target="_blank" class="btn pr p-primary p-facebook big"></a>
+						{% endif %}
+						{% if this.theme.linkedin %}
+						<a href="{{this.theme.linkedin_url}}" target="_blank" class="btn pr p-primary p-linkedin big"></a>
+						{% endif %}
+						{% if this.theme.youtube %}
+						<a href="{{this.theme.youtube_url}}" target="_blank" class="btn pr p-primary p-youtube big"></a>
+						{% endif %}
+						{% if this.theme.instagram %}
+						<a href="{{this.theme.instagram_url}}" target="_blank" class="btn pr p-primary p-instagram big"></a>
+						{% endif %}
+						{% if this.theme.researchgate %}
+						<a href="{{this.theme.researchgate_url}}" target="_blank" class="btn pr p-primary p-researchgate big" style="width: 64px;"></a>
+						{% endif %}
 					</div>
 				</div>
-			</div>
-			{% endfor %}
-		</div>
-		<div class="row justify-content-center">
-			<a class="btn btn-primary view_all" href="{{'news'|page}}">Check out all news <i></i></a>
-		</div>
-	</div>
-</div>
-{% endif %}
-
-<!-- Subscribe -->
-<div class="container subscriber">
-	<div class="row between-xs subscriber-row">
-		<div class="col-md-7 col-xs-12">
-			<h2>Stay connected! Subscribe to our newsletter or share your feedback with us.</h2>
-		</div>
-		<div class="col-md-5 col-xs-12">
-			<div class="row end-xs">
-				<a class="btn btn-primary view_all" href="{{'news'|page}}">Subscribe <i></i></a>
-				<a class="btn btn-primary view_all" href="{{'news'|page}}">Share feedback <i></i></a>
+	
+	
 			</div>
 		</div>
 	</div>
