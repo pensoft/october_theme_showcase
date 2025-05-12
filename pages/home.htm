@@ -46,7 +46,6 @@ function onStart(){
 }
 ?>
 ==
-
 {% component 'jumbotron' %}
 
 <!-- Results -->
@@ -72,7 +71,9 @@ function onStart(){
 						</a>
 					</div>
 					<div class="results-card-content">
-						<div class="results-label">Label</div>
+						{% if result.label %}
+						<div class="results-label">{{ result.label }}</div>
+						{% endif %}
 						<p class="results-date">{{ result.published_at|date("d M Y") }}</p>
 						<a href="/news/{{result.slug}}">
 							<p class="results-title">
@@ -137,8 +138,8 @@ function onStart(){
 		</div>
 		<div class="col-md-5 col-xs-12">
 			<div class="row end-xs">
-				<a class="btn btn-primary view_all" href="{{'news'|page}}">Subscribe <i></i></a>
-				<a class="btn btn-primary view_all" href="{{'news'|page}}">Share feedback <i></i></a>
+				<a class="btn btn-primary view_all" href="https://dashboard.mailerlite.com/forms/607105/101080064873989335/share" target="_blank">Subscribe <i></i></a>
+				<a class="btn btn-primary view_all" href="{{'contact'|page}}">Share feedback <i></i></a>
 			</div>
 		</div>
 	</div>

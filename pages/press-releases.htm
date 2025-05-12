@@ -73,12 +73,14 @@ function onStart(){
 					<div class="news-title">
 						<h3 class="card-title">{{record.name}}</h3>
 					</div>
-					<div class="text-published">{{record.date|date('j F Y')}}</div>
-					<div class="body">{{record.description | raw}}</div>
-					<div class="row link mt-1">
-						{% for link in record.link %}
-                        <a href="{{link.url}}" target="_blank" class="btn btn-primary" style="margin-right: 10px;">{{link.text}}</a>
-                        {% endfor %}
+					<div>
+						<div class="text-published">{{record.date|date('j F Y')}}</div>
+						<div class="body">{{record.description | raw}}</div>
+						<div class="row link mt-1">
+							{% for link in record.link %}
+	                        <a href="{{link.url}}" target="_blank" class="btn btn-primary" style="margin-right: 10px;">{{link.text}}</a>
+	                        {% endfor %}
+						</div>
 					</div>
 				</div>
 			</div>
