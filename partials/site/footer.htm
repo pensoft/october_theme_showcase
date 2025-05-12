@@ -1,4 +1,11 @@
-<div class="container-fluid border-box">
+[cookieConsent]
+message = "This website uses cookies to ensure you get the best experience on our website."
+dismiss = "Got it!"
+learnMore = "Opt-out here"
+link = "/privacy-policy#cookies"
+theme = "dark-bottom"
+==
+{% component 'cookieConsent' %}<div class="container-fluid border-box">
     <div class="row between-xs align-items-center">
         {% if (footer_funds_flag != null or footer_funds_text != '') %}
         <div class="funding flex-column my-1 my-lg-0 flex-lg-row px-1 align-items-center col-md-6 col-xs-12">
