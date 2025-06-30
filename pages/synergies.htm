@@ -68,6 +68,12 @@ function onStart(){
                             <div class="col-md-12 col-xs-12">
                                 <div class="about_label">About the project</div>
                                 <p>{{record.description|raw}}</p>
+                                {% if record.social_media %}
+                                <div class="about_label">Follow the project on social media</div>
+                                {% for social_item in record.social_media %}
+                                <a href="{{social_item.link}}" target="_blank" class="btn p-primary pr p-{{social_item.media}} big"></a>
+                                {% endfor %}
+                                {% endif %}
                             </div>
                             <div class="col-md-12 col-xs-12"><a href="{{record.website}}" class="project_website" target="_blank">Visit website</a></div>
                         </div>
@@ -111,6 +117,14 @@ function onStart(){
                         <div class="col-md-12 col-xs-12">
                             <div class="about_label">About the project</div>
                             <p>{{record.description|raw}}</p>
+
+                            {% if record.social_media %}
+                            <div class="about_label">Follow the project on social media</div>
+                            {% for social_item in record.social_media %}
+                            <a href="{{social_item.link}}" target="_blank" class="btn p-primary pr p-{{social_item.media}} big"></a>
+                            {% endfor %}
+                            {% endif %}
+
                         </div>
                         <div class="col-md-12 col-xs-12"><a href="{{record.website}}" class="project_website" target="_blank">Visit website</a></div>
                     </div>
