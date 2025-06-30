@@ -83,7 +83,7 @@
             border-radius: 50%;
             transform: rotate(180deg);
             .breakpoint-large-down({
-                right: 20px;
+                right: 73px;
             });
             &:hover{
                 opacity: 0.5;
@@ -105,7 +105,7 @@
             border-radius: 50%;
 
             .breakpoint-large-down({
-                right: 73px;
+                right: 20px;
             });
             &:hover{
                 opacity: 0.5;
@@ -189,7 +189,8 @@
                     }
                 }
                 .breakpoint-large-down({
-                    width: 100%;
+                    max-width: 80%;
+                    margin: 0 auto;
                 });
             }
         }
@@ -203,6 +204,10 @@
             &:hover{
                 cursor: pointer;
             }
+
+            .breakpoint-large-down({
+                display: none;
+            });
         }
 
         .trigger_prev{
@@ -253,7 +258,7 @@
                         left: 50%;
                         width: 20px;
                         height: 20px;
-                        background-color: @link-color;
+                        background-color: @yellow-color;
                         border-radius: 50%;
                         transform: translate(-50%, -50%);
                         transition: background-color .25s ease;
@@ -426,6 +431,9 @@
         text-align: center;
         width: 50%;
         margin: 0 auto;
+        .breakpoint-large-down({
+            width: 100%;
+        });
     }
 }
 
@@ -437,6 +445,9 @@
         text-align: center;
         width: 50%;
         margin: 40px auto;
+        .breakpoint-large-down({
+            width: 100%;
+        });
     }
 
     .projects_list{
@@ -457,6 +468,8 @@
         justify-content: center;
         .breakpoint-large-down({
             padding: 0 5px;
+            max-width: 80%;
+            margin:  0 auto;
         });
     }
     img{
@@ -499,6 +512,8 @@
             align-items: center;
             justify-content: center;
 
+
+
             img{
                 width: 90px;
                 height: 90px;
@@ -513,6 +528,9 @@
             text-align: left;
             line-height: 1.4em;
             padding-left: 20px;
+            .breakpoint-large-down({
+                margin: 40px auto;
+            });
         }
 
         .partner_link{
@@ -532,6 +550,10 @@
                 &:hover{
                     opacity: 0.7;
                 }
+
+                .breakpoint-large-down({
+                    margin: 0px auto;
+                });
 
             }
         }

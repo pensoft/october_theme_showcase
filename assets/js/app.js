@@ -266,11 +266,12 @@ $(document).ready(function() {
                 {
                     breakpoint: 768,
                     settings: {
-                        arrows: false,
+                        arrows: true,
                         dots: true,
                         centerMode: true,
                         centerPadding: '2%',
-                        slidesToShow: 1
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
                     }
                 }
             ]
