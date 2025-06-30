@@ -178,14 +178,6 @@ $(document).ready(function() {
         '<h3 class="card-header"><a href="https://docs.google.com/spreadsheets/d/1keGpeMxdG6xHkkoyLiZhM7K-pMR-wpfNPRNr4_8QHNA/editt#gid=0" target="_blank" title="Relevant content">Relevant content</a></h3>\n' +
         '</div>').insertAfter($('.card.internal').last());
 
-	// $('#libraryForm select[name="Filter[type]"]').change(function(){
-    //     $('#removeDivId').remove();
-    //     if($(this).find('option:selected').val() == 1){
-    //         $('#partialLibraries').before('<div style="margin-top: 40px; margin-bottom: 40px;" id="removeDivId">Please keep in mind that the content of all of SHOWCASE\'s deliverables is subject to change.</div>');
-    //     }else{
-    //         $('#removeDivId').remove();
-    //     }
-    // });
 
     /*
      * HOMEPAGE intro carousel
@@ -203,6 +195,18 @@ $(document).ready(function() {
         lazyLoad: 'ondemand',
         dots: true,
     });
+
+    // bootstrap 3 breakpoints
+    const breakpoint = {
+        // extra small screen / phone
+        xs: 280,
+        // small screen / tablet
+        sm: 768,
+        // medium screen / desktop
+        md: 992,
+        // large screen / large desktop
+        lg: 1200
+    };
 
     /* News highlights carousel **/
 	$('.results-carousel').slick({
@@ -236,6 +240,60 @@ $(document).ready(function() {
 			},
 		]
 	});
+    /* News highlights carousel **/
+    if($('.related-news-carousel').length) {
+        /* News highlights carousel **/
+        $('.related-news-carousel').slick({
+            autoplay: false,
+            // autoplaySpeed: 2000,
+            draggable: true,
+            // pauseOnHover: true,
+            centerMode: true,
+            variableWidth: true,
+            infinite: true,
+            slidesToShow: 3,
+            speed: 1000,
+            centerPadding: '8%',
+            slidesToScroll: 1,
+            // centerPadding: '40px',
+            arrows: true,
+            dots: false,
+
+
+            // centerPadding: '0px',
+
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        dots: true,
+                        centerMode: true,
+                        centerPadding: '2%',
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+
+        $(".trigger_prev").click(function () {
+            $(".slick-prev").click();
+            return false;
+        });
+        $(".trigger_next").click(function () {
+            $(".slick-next").click();
+            return false;
+        });
+
+        $(".trigger_prev_arrow").click(function () {
+            $(".slick-prev").click();
+            return false;
+        });
+        $(".trigger_next_arrow").click(function () {
+            $(".slick-next").click();
+            return false;
+        });
+    }
 
     // Custom navigation button events
     $('.trigger_prev').on('click', function() {
@@ -260,9 +318,10 @@ $(document).ready(function() {
         mobileFirst: true,
 
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
         autoSlidesToShow: true,
         variableWidth: true,
+        centerPadding: '8%',
         // prevArrow: true,
         // nextArrow: true,
 
@@ -300,6 +359,64 @@ $(document).ready(function() {
             }
         ]
     });
+
+
+
+
+
+    $('#research_projects').slick({
+        autoplay: true,
+        autoplaySpeed: 2000,
+        draggable: true,
+        pauseOnHover: true,
+        infinite: true,
+        dots: false,
+        arrows: true,
+        speed: 1000,
+        centerMode: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoSlidesToShow: true,
+        variableWidth: false,
+        centerPadding: '8%',
+
+        responsive: [
+            {
+                breakpoint: breakpoint.sm,
+                settings: {
+                    dots: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            // {
+            //     breakpoint: breakpoint.sm,
+            //     settings: {
+            //         slidesToShow: 3,
+            //         slidesToScroll: 1,
+            //         arrows: true
+            //     }
+            // },
+            // {
+            //     breakpoint: breakpoint.md,
+            //     settings: {
+            //         slidesToShow: 3,
+            //         slidesToScroll: 1,
+            //         arrows: true
+            //     }
+            // },
+            // {
+            //     breakpoint: breakpoint.lg,
+            //     settings: {
+            //         slidesToShow: 4,
+            //         slidesToScroll: 1,
+            //         arrows: true
+            //     }
+            // }
+        ]
+    });
+
+
 });
 
 
@@ -310,7 +427,7 @@ function encodeURIObject(data){
     }).join('&');
 }
 
-function appendProfile() { 
+function appendProfile() {
     $(document).on('profile', function (e) {
         var navbarNav = $('.navbar-nav');
         var li = '<li class="nav-item"><a class="btn btn-primary" href="/profile" target = "_self">Profile</a></li>';
